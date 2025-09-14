@@ -4,10 +4,7 @@ using FidesOS.Comunicacao.Requisicoes;
 using FidesOS.Comunicacao.Respostas;
 
 namespace FidesOS.Api.Controllers;
-
-[Route("[controller]")]
-[ApiController]
-public class UsuariosController : ControllerBase
+public class UsuarioController : FidesOSControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(RespostaUsuarioRegistradoJson), StatusCodes.Status201Created)]

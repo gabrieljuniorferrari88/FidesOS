@@ -4,10 +4,7 @@ using FidesOS.Comunicacao.Respostas;
 using FidesOS.Aplicacao.CasoDeUsos.Token.RefreshToken;
 
 namespace FidesOS.Api.Controllers;
-
-[Route("[controller]")]
-[ApiController]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : FidesOSControllerBase
 {
     [HttpPost("refresh")]
     [ProducesResponseType(typeof(RespostaTokensJson), StatusCodes.Status200OK)]

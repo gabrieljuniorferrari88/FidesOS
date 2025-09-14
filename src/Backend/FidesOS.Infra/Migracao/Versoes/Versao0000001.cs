@@ -12,7 +12,7 @@ public class Versao0000001 : VersaoBase
     CreateTable("Usuario")
             .WithColumn("Nome").AsString(255).NotNullable()
             .WithColumn("Email").AsString(255).NotNullable().Unique() // <<< CORRIGIDO
-            .WithColumn("SenhaCriptografada").AsString(2000).NotNullable()
+            .WithColumn("Senha").AsString(2000).NotNullable()
             .WithColumn("UserIdentificacao").AsGuid().NotNullable().Unique() // <<< CORRIGIDO
             .WithColumn("GestorIdentificacao").AsGuid().NotNullable().Indexed()
             .WithColumn("Perfil").AsInt16().NotNullable()
@@ -22,6 +22,6 @@ public class Versao0000001 : VersaoBase
     CreateTable("RefreshTokens")
             .WithColumn("Token").AsString(1000).NotNullable()
             .WithColumn("AccessTokenId").AsGuid().NotNullable()
-            .WithColumn("UserIdentificacao").AsGuid().NotNullable().ForeignKey("FK_RefreshTokens_User_Id", "Usuario", "UserIdentificacao");
+            .WithColumn("UserIdentificacao").AsGuid().NotNullable().ForeignKey("FK_RefreshTokens_User_Identificacao", "Usuario", "UserIdentificacao");
   }
 }

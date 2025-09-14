@@ -24,20 +24,8 @@ public static class InjecaoDependenciaExtensao
   private static void AddUseCases(IServiceCollection services)
   {
     services.AddScoped<IRegistrarUsuarioCasoDeUso, RegistrarUsuarioCasoDeUso>();
-    //services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
-    //services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
-    //services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
-    //services.AddScoped<IChangeUserPhotoUseCase, ChangeUserPhotoUseCase>();
 
     services.AddScoped<IFazerLoginCasoDeUso, FazerLoginCasoDeUso> ();
-
-    //services.AddScoped<IRegisterWorkItemUseCase, RegisterWorkItemUseCase>();
-    //services.AddScoped<IDeleteWorkItemUseCase, DeleteWorkItemUseCase>();
-    //services.AddScoped<IUpdateWorkItemUseCase, UpdateWorkItemUseCase>();
-    //services.AddScoped<IGetByIdWorkItemUseCase, GetByIdWorkItemUseCase>();
-    //services.AddScoped<IGetAllWorkItemUseCase, GetAllWorkItemUseCase>();
-
-    //services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
 
     services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
   }

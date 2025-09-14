@@ -20,6 +20,19 @@ internal sealed class FidesOSDbContext : DbContext
     base.OnModelCreating(modelBuilder);
    
     modelBuilder.Entity<Usuario>().ToTable("Usuario");
+
+    modelBuilder.Entity<RefreshToken>(entity =>
+    {
+      entity.ToTable("RefreshTokens");
+      entity.HasKey(e => e.Id);
+
+      entity.HasOne(refreshToken => refreshToken.User)
+            .WithMany()
+            .HasForeignKey(refreshToken => refreshToken.UserIdentificacao)
+            // <<< A CORREÇÃO ESTÁ AQUI
+            // Dizemos qual é a "tomada" correta na tabela Usuario
+            .HasPrincipalKey(usuario => usuario.UserIdentificacao);
+    });
   }
 }
 

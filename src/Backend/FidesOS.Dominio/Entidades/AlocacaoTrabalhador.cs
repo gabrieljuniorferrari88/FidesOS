@@ -3,7 +3,7 @@
 namespace FidesOS.Dominio.Entidades;
 public class AlocacaoTrabalhador : EntidadeBase
 {
-  public Guid AlocacaoIdentificacao { get; protected set; } = Guid.NewGuid();
+  public Guid AlocacaoIdentificacao { get; protected set; } = Guid.CreateVersion7();
   public Guid OsIdentificacao { get; protected set; } // FK para OrdemDeServico
   public Guid TrabalhadorIdentificacao { get; protected set; } // FK para o Usuario "Trabalhador"
 

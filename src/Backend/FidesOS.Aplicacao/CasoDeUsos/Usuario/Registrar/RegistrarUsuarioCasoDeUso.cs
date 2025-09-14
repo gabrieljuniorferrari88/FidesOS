@@ -44,9 +44,8 @@ public class RegistrarUsuarioCasoDeUso : IRegistrarUsuarioCasoDeUso
     await Validate(request);
 
     var user = request.Adapt<Dominio.Entidades.Usuario>();
-    //user.SenhaCriptografada = _passwordEncripter.Encrypt(request.Senha);
     user.SetSenhaCriptogragada(_passwordEncripter.Encrypt(request.Senha));
-
+    user.DefinirGestor();
 
     var tokens = _tokenService.GenerateTokens(user);
 
@@ -54,7 +53,7 @@ public class RegistrarUsuarioCasoDeUso : IRegistrarUsuarioCasoDeUso
 
     await _refreshTokenRepository.Add(new Dominio.Entidades.RefreshToken
     {
-      UserId = user.UserIdentificacao,
+      UserIdentificacao = user.UserIdentificacao,
       Token = tokens.Refresh,
       AccessTokenId = tokens.AccessTokenId
     });

@@ -46,7 +46,7 @@ public class FazerLoginCasoDeUso : IFazerLoginCasoDeUso
 
     await _refreshTokenRepository.Add(new Dominio.Entidades.RefreshToken
     {
-      UserId = user.UserIdentificacao,
+      UserIdentificacao = user.UserIdentificacao,
       Token = tokens.Refresh,
       AccessTokenId = tokens.AccessTokenId
     });

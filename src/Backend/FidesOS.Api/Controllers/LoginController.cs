@@ -4,10 +4,7 @@ using FidesOS.Comunicacao.Respostas;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidesOS.Api.Controllers;
-
-[Route("[controller]")]
-[ApiController]
-public class LoginController : ControllerBase
+public class LoginController : FidesOSControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(RespostaUsuarioRegistradoJson), StatusCodes.Status200OK)]

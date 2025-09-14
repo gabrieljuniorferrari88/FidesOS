@@ -30,7 +30,6 @@ public static class MigracaoBancoDeDados
 
     var databaseName = connectionStringBuilder.Database;
 
-    // Remove o banco de dados alvo da conex�o
     connectionStringBuilder.Remove("Database");
     connectionStringBuilder.Database = "postgres";
 
@@ -39,12 +38,15 @@ public static class MigracaoBancoDeDados
     var parameters = new DynamicParameters();
     parameters.Add("name", databaseName);
 
-    // Consulta PostgreSQL para verificar se o banco existe
     var records = dbConnection.Query(
         "SELECT 1 FROM pg_database WHERE datname = @name", parameters);
 
-    if (!records.Any().IsFalse())
-      dbConnection.Execute($"CREATE DATABASE {databaseName}");
+    // <<< A CORREÇÃO ESTÁ AQUI
+    // Verifica se a lista de registros está vazia (ou seja, se o banco NÃO existe)
+    if (!records.Any())
+    {
+      dbConnection.Execute($"CREATE DATABASE \"{databaseName}\"");
+    }
   }
 
   private static void EnsureDatabaseCreatedForSQLServer(string connectionString)
