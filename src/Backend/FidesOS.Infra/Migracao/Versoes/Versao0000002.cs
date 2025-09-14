@@ -1,8 +1,6 @@
-using FidesOS.Infra.Migracao;
-using FidesOS.Infra.Migracao.Versoes;
 using FluentMigrator;
 
-namespace FidesOS.Infrastructure.Migrations.Versions;
+namespace FidesOS.Infra.Migracao.Versoes;
 
 [Migration(VersaoBancoDeDados.TABELAS_ORDEM_SERVICO, "Criando tabelas de Ordem de Serviço, Alocações e Detalhes")]
 public class Versao0000002 : VersaoBase

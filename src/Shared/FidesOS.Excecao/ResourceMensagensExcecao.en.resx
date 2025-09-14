@@ -156,6 +156,9 @@
   <data name="NOME_EM_BRANCO" xml:space="preserve">
     <value>Name cannot be empty.</value>
   </data>
+  <data name="PERFIL_NAO_INFORMADO" xml:space="preserve">
+    <value>The profile was not informed.</value>
+  </data>
   <data name="SEM_TOKEN" xml:space="preserve">
     <value>Request don't have token.</value>
   </data>

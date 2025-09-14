@@ -12,14 +12,14 @@ internal sealed class JwtTokenValidator : JwtTokenHandler, ITokenValidadorAcesso
 
   public Guid GetAccessTokenIdentifier(string token)
   {
-    var identifier = GetClaimValue(token, JwtRegisteredClaimNames.Jti);
+    var identifier = GetClaimValue(token, JwtRegisteredClaimNames.Jti); //token
 
     return Guid.Parse(identifier);
   }
 
   public Guid GetUserIdentifier(string token)
   {
-    var identifier = GetClaimValue(token, JwtRegisteredClaimNames.NameId);
+    var identifier = GetClaimValue(token, JwtRegisteredClaimNames.NameId);//usuario
 
     return Guid.Parse(identifier);
   }

@@ -1,8 +1,6 @@
-using FidesOS.Infra.Migracao;
-using FidesOS.Infra.Migracao.Versoes;
 using FluentMigrator;
 
-namespace NextSind.Infrastructure.Migrations.Versions;
+namespace FidesOS.Infra.Migracao.Versoes;
 
 [Migration(VersaoBancoDeDados.TABELA_USUARIO, "Criando a tabela usuario")]
 public class Versao0000001 : VersaoBase

@@ -178,6 +178,15 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O perfil não foi informado..
+        /// </summary>
+        public static string PERFIL_NAO_INFORMADO {
+            get {
+                return ResourceManager.GetString("PERFIL_NAO_INFORMADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O pedido não tem token..
         /// </summary>
         public static string SEM_TOKEN {

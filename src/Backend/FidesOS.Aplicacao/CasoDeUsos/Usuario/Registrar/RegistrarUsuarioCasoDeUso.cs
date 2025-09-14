@@ -1,5 +1,4 @@
 ﻿using FidesOS.Aplicacao.Servicos.Autenticacao;
-using FidesOS.Application.UseCases.Usuario.Registrar;
 using FidesOS.Comunicacao.Requisicoes;
 using FidesOS.Comunicacao.Respostas;
 using FidesOS.Dominio.Extencoes;
