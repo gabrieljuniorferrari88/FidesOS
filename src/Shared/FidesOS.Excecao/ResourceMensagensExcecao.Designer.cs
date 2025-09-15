@@ -196,7 +196,7 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a A palavra-passe introduzida é diferente da palavra-passe atual..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A senha informada é diferente da senha atual..
         /// </summary>
         public static string SENHA_ATUAL_DIFERENTE_DA_ATUAL {
             get {

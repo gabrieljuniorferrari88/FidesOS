@@ -1,6 +1,4 @@
-﻿using FidesOS.Dominio.Enums;
-
-namespace FidesOS.Comunicacao.Requisicoes;
+﻿namespace FidesOS.Comunicacao.Requisicoes;
 
 public class RequisicaoAlterarUsuarioJson
 {

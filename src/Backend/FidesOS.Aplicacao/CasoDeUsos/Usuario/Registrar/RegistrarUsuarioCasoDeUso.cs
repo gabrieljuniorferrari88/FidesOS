@@ -43,7 +43,7 @@ public class RegistrarUsuarioCasoDeUso : IRegistrarUsuarioCasoDeUso
     await Validate(request);
 
     var user = request.Adapt<Dominio.Entidades.Usuario>();
-    user.SetSenhaCriptogragada(_passwordEncripter.Encrypt(request.Senha));
+    user.AlterarSenha(_passwordEncripter.Encrypt(request.Senha));
     user.DefinirGestor();
 
     var tokens = _tokenService.GenerateTokens(user);

@@ -17,7 +17,7 @@ public class Usuario : EntidadeBase
   public string? AvatarUrl { get; protected set; }
 
   // Adicione este método
-  public void SetSenhaCriptogragada(string senha)
+  public void AlterarSenha(string senha)
   {
     Senha = senha;
   }

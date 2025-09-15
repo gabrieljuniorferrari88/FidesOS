@@ -163,7 +163,7 @@
     <value>O pedido não tem token.</value>
   </data>
   <data name="SENHA_ATUAL_DIFERENTE_DA_ATUAL" xml:space="preserve">
-    <value>A palavra-passe introduzida é diferente da palavra-passe atual.</value>
+    <value>A senha informada é diferente da senha atual.</value>
   </data>
   <data name="SENHA_EM_BRANCO" xml:space="preserve">
     <value>A palavra-passe não pode estar vazia.</value>

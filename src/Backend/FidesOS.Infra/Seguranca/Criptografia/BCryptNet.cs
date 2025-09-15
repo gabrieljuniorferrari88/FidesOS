@@ -6,7 +6,7 @@ namespace FidesOS.Infra.Seguranca.Criptografia;
 
 internal sealed class BCryptNet : ISenhaCriptografada
 {
-  public string Encrypt(string password) => BCrypt.Net.BCrypt.HashPassword(password);
+  public string Encrypt(string senha) => BCrypt.Net.BCrypt.HashPassword(senha);
 
-  public bool IsValid(string password, string passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
+  public bool IsValid(string senha, string senhaCriptografada) => BCrypt.Net.BCrypt.Verify(senha, senhaCriptografada);
 }
