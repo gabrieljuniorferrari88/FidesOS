@@ -6,4 +6,5 @@ public abstract class VersaoBancoDeDados
   public const int TABELAS_ORDEM_SERVICO = 2; 
   public const int RELACIONAMENTOS_TABELAS_ORDEM_SERVICO = 3;
   public const int TRIGGER_ATUALIZADO_EM = 4;
+  public const int TOKEN_RECUPERACAO_SENHA_USUARIO = 5;
 }

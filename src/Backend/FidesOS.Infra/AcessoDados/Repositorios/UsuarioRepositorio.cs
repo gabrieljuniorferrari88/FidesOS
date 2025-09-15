@@ -37,4 +37,11 @@ internal sealed class UsuarioRepositorio : IRepositorioEscritaUsuario, IReposito
   }
 
   public void Update(Usuario usuario) => _dbContext.Usuarios.Update(usuario);
+
+  public async Task<Usuario?> BuscarPorTokenDeRecuperacao(string token)
+  {
+    return await _dbContext
+        .Usuarios
+        .SingleOrDefaultAsync(usuario => usuario.TokenRecuperacaoSenha!.Equals(token));
+  }
 }

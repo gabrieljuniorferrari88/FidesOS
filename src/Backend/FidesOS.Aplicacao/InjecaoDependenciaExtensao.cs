@@ -1,4 +1,6 @@
 ﻿using FidesOS.Aplicacao.CasoDeUsos.FazerLogin;
+using FidesOS.Aplicacao.CasoDeUsos.Senha.Recuperar;
+using FidesOS.Aplicacao.CasoDeUsos.Senha.Resetar;
 using FidesOS.Aplicacao.CasoDeUsos.Token.RefreshToken;
 using FidesOS.Aplicacao.CasoDeUsos.Usuario.Alterar;
 using FidesOS.Aplicacao.CasoDeUsos.Usuario.AlterarSenha;
@@ -30,6 +32,9 @@ public static class InjecaoDependenciaExtensao
     services.AddScoped<IAlterarUsuarioCasoDeUso, AlterarUsuarioCasoDeUso>();
     services.AddScoped<IBuscarPerfilUsuarioCasoDeUso, BuscarPerfilUsuarioCasoDeUso>();
     services.AddScoped<IAlterarSenhaUsuarioCasoDeUso, AlterarSenhaUsuarioCasoDeUso>();
+
+    services.AddScoped<IRecuperarSenhaCasoDeUso, RecuperarSenhaCasoDeUso>();
+    services.AddScoped<IResetarSenhaCasoDeUso, ResetarSenhaCasoDeUso>();
 
     services.AddScoped<IFazerLoginCasoDeUso, FazerLoginCasoDeUso> ();
 

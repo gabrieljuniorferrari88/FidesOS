@@ -15,8 +15,21 @@ public class Usuario : EntidadeBase
   public StatusUsuario Status { get; protected set; }
 
   public string? AvatarUrl { get; protected set; }
+  public string? TokenRecuperacaoSenha { get; protected set; }
+  public DateTime? DataExpiracaoToken { get; protected set; }
 
-  // Adicione este método
+  public void GerarTokenDeRecuperacao()
+  {
+    TokenRecuperacaoSenha = Guid.CreateVersion7().ToString();
+    DataExpiracaoToken = DateTime.UtcNow.AddMinutes(15);
+  }
+
+  public void LimparTokenDeRecuperacao()
+  {
+    TokenRecuperacaoSenha = null;
+    DataExpiracaoToken = null;
+  }
+
   public void AlterarSenha(string senha)
   {
     Senha = senha;
