@@ -123,6 +123,18 @@
   <data name="CODIGO_REQUERIDO_PARA_ALTERAR_SENHA" xml:space="preserve">
     <value>É necessário um código para repor a sua palavra-passe.</value>
   </data>
+  <data name="DATA_INFERIOR_3_HORAS" xml:space="preserve">
+    <value>O agendamento precisa ser feito com pelo menos 3 horas de antecedência.</value>
+  </data>
+  <data name="DATA_INVALIDA" xml:space="preserve">
+    <value>A data é obrigatória e não pode estar vazia.</value>
+  </data>
+  <data name="DATA_NO_PASSADO" xml:space="preserve">
+    <value>Não é possível agendar para datas passadas. Escolha uma data futura.</value>
+  </data>
+  <data name="DESCRICAO_INVALIDA" xml:space="preserve">
+    <value>A descrição é obrigatório.</value>
+  </data>
   <data name="EMAIL_EM_BRANCO" xml:space="preserve">
     <value>O correio eletrónico não pode estar vazio.</value>
   </data>
@@ -134,6 +146,9 @@
   </data>
   <data name="EMAIL_OU_SENHA_INVALIDO" xml:space="preserve">
     <value>E-mail e/ou palavra-passe inválidos.</value>
+  </data>
+  <data name="EMPRESA_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Empresa não encontrado.</value>
   </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
@@ -151,7 +166,7 @@
     <value>Não foi possível encontrar uma sessão válida. Inicie sessão para aceder a esta funcionalidade.</value>
   </data>
   <data name="NAO_ENCONTRADO" xml:space="preserve">
-    <value>Não encontrado</value>
+    <value>Não encontrado.</value>
   </data>
   <data name="NOME_EM_BRANCO" xml:space="preserve">
     <value>O nome não pode estar vazio.</value>

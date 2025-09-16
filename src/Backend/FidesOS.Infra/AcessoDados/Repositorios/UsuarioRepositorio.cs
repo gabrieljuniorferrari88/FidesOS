@@ -1,4 +1,5 @@
 ﻿using FidesOS.Dominio.Entidades;
+using FidesOS.Dominio.Enums;
 using FidesOS.Dominio.Repositories.Usuarios;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,5 +44,13 @@ internal sealed class UsuarioRepositorio : IRepositorioEscritaUsuario, IReposito
     return await _dbContext
         .Usuarios
         .SingleOrDefaultAsync(usuario => usuario.TokenRecuperacaoSenha!.Equals(token));
+  }
+
+  public async Task<bool> ExisteEmpresaComUserIdentificacao(Guid id)
+  {
+    return await _dbContext
+        .Usuarios
+        .Where(e => e.Perfil.Equals(PerfilUsuario.Empresa))
+        .AnyAsync(e => e.UserIdentificacao.Equals(id));
   }
 }

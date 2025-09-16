@@ -10,5 +10,10 @@ public static class ConfiguracaoDeMapeamentos
     TypeAdapterConfig<RequisicaoRegistrarUsuarioJson, Dominio.Entidades.Usuario>
         .NewConfig()
         .Ignore(dest => dest.Senha);
+
+    TypeAdapterConfig<RequisicaoOrdemDeServicoJson, Dominio.Entidades.OrdemDeServico>
+        .NewConfig()
+        .Ignore(dest => dest.GestorIdentificacao)
+        .Ignore(dest => dest.Status);
   }
 }

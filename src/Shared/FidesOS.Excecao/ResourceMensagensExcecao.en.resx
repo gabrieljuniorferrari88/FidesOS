@@ -123,6 +123,18 @@
   <data name="CODIGO_REQUERIDO_PARA_ALTERAR_SENHA" xml:space="preserve">
     <value>A code is required to reset your password.</value>
   </data>
+  <data name="DATA_INFERIOR_3_HORAS" xml:space="preserve">
+    <value>Appointments must be made at least 3 hours in advance.</value>
+  </data>
+  <data name="DATA_INVALIDA" xml:space="preserve">
+    <value>The date is mandatory and cannot be empty.</value>
+  </data>
+  <data name="DATA_NO_PASSADO" xml:space="preserve">
+    <value>You can't schedule for past dates. Please select a future date.</value>
+  </data>
+  <data name="DESCRICAO_INVALIDA" xml:space="preserve">
+    <value>Description is required.</value>
+  </data>
   <data name="EMAIL_EM_BRANCO" xml:space="preserve">
     <value>Email cannot be empty.</value>
   </data>
@@ -134,6 +146,9 @@
   </data>
   <data name="EMAIL_OU_SENHA_INVALIDO" xml:space="preserve">
     <value>Invalid email and/or password.</value>
+  </data>
+  <data name="EMPRESA_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Company not found.</value>
   </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Unknown error.</value>

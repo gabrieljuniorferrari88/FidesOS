@@ -29,8 +29,6 @@ internal sealed class FidesOSDbContext : DbContext
       entity.HasOne(refreshToken => refreshToken.User)
             .WithMany()
             .HasForeignKey(refreshToken => refreshToken.UserIdentificacao)
-            // <<< A CORREÇÃO ESTÁ AQUI
-            // Dizemos qual é a "tomada" correta na tabela Usuario
             .HasPrincipalKey(usuario => usuario.UserIdentificacao);
     });
   }

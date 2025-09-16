@@ -79,6 +79,42 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O agendamento precisa ser feito com pelo menos 3 horas de antecedência..
+        /// </summary>
+        public static string DATA_INFERIOR_3_HORAS {
+            get {
+                return ResourceManager.GetString("DATA_INFERIOR_3_HORAS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data é obrigatória e não pode estar vazia..
+        /// </summary>
+        public static string DATA_INVALIDA {
+            get {
+                return ResourceManager.GetString("DATA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não é possível agendar para datas passadas. Escolha uma data futura..
+        /// </summary>
+        public static string DATA_NO_PASSADO {
+            get {
+                return ResourceManager.GetString("DATA_NO_PASSADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A descrição é obrigatório..
+        /// </summary>
+        public static string DESCRICAO_INVALIDA {
+            get {
+                return ResourceManager.GetString("DESCRICAO_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O correio eletrónico não pode estar vazio..
         /// </summary>
         public static string EMAIL_EM_BRANCO {
@@ -111,6 +147,15 @@ namespace FidesOS.Excecao {
         public static string EMAIL_OU_SENHA_INVALIDO {
             get {
                 return ResourceManager.GetString("EMAIL_OU_SENHA_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Empresa não encontrado..
+        /// </summary>
+        public static string EMPRESA_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("EMPRESA_NAO_ENCONTRADO", resourceCulture);
             }
         }
         
@@ -160,7 +205,7 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Não encontrado.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não encontrado..
         /// </summary>
         public static string NAO_ENCONTRADO {
             get {

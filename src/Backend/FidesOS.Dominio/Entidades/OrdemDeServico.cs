@@ -12,4 +12,15 @@ public class OrdemDeServico : EntidadeBase
   public string Descricao { get; protected set; } = string.Empty;
 
   // TODO: Adicionar a lista de Alocacoes (propriedade de navegação)
+  public void CriarOrdemServico(Guid gestorId, Guid empresaClienteId, DateTime dataAgendamento)
+  {
+    GestorIdentificacao = gestorId;
+    EmpresaClienteId = empresaClienteId;
+    DataAgendamento = dataAgendamento;
+  }
+
+  public void AdicionarOGestorId(Guid gestorId)
+  {
+    GestorIdentificacao = gestorId;
+  }
 }
