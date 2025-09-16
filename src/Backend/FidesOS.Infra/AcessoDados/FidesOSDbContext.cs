@@ -1,4 +1,5 @@
 ﻿using FidesOS.Dominio.Entidades;
+using FidesOS.Infra.AcessoDados.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
@@ -17,20 +18,9 @@ internal sealed class FidesOSDbContext : DbContext
   
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    modelBuilder.ApplyConfigurationsFromAssembly(typeof(FidesOSDbContext).Assembly);
+
     base.OnModelCreating(modelBuilder);
-   
-    modelBuilder.Entity<Usuario>().ToTable("Usuario");
-
-    modelBuilder.Entity<RefreshToken>(entity =>
-    {
-      entity.ToTable("RefreshTokens");
-      entity.HasKey(e => e.Id);
-
-      entity.HasOne(refreshToken => refreshToken.User)
-            .WithMany()
-            .HasForeignKey(refreshToken => refreshToken.UserIdentificacao)
-            .HasPrincipalKey(usuario => usuario.UserIdentificacao);
-    });
   }
 }
 
