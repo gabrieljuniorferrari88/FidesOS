@@ -1,5 +1,6 @@
 ﻿using FidesOS.Api.Atributos;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Comunicacao.Requisicoes;
 using FidesOS.Comunicacao.Respostas;
 using Microsoft.AspNetCore.Mvc;
@@ -19,5 +20,18 @@ public class OrdemDeServicoController : FidesOSControllerBase
     var response = await useCase.Execute(request);
 
     return Created(string.Empty, response);
+  }
+
+  [HttpGet]
+  [ProducesResponseType(typeof(RespostaPaginadaJson<RespostaOrdemDeServicoResumidaJson>), StatusCodes.Status200OK)]
+  [UsuarioAutenticado]
+  public async Task<IActionResult> ListarOrdemServico(
+    [FromServices] IListarOrdensDeServicoCasoDeUso useCase,
+    [FromQuery] int pagina,
+    [FromQuery] int itensPorPagina)
+  {
+    var response = await useCase.Execute(pagina, itensPorPagina);
+
+    return Ok(response);
   }
 }

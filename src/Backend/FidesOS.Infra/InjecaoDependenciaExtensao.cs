@@ -73,6 +73,7 @@ public static class InjecaoDependenciaExtensao
     services.AddScoped<IRepositorioAlteracaoUsuario, UsuarioRepositorio>();
 
     services.AddScoped<IRepositorioEscritaOrdemDeServico, RepositorioOrdemDeServico>();
+    services.AddScoped<IRepositorioLeituraOrdemDeServico, RepositorioOrdemDeServico>();
 
     services.AddScoped<IRefreshTokenRepositorioLeitura, RepositorioRefreshToken>();
 

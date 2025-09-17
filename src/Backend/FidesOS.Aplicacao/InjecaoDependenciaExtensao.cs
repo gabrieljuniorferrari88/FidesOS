@@ -1,5 +1,6 @@
 ﻿using FidesOS.Aplicacao.CasoDeUsos.FazerLogin;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Aplicacao.CasoDeUsos.Senha.Recuperar;
 using FidesOS.Aplicacao.CasoDeUsos.Senha.Resetar;
 using FidesOS.Aplicacao.CasoDeUsos.Token.RefreshToken;
@@ -38,6 +39,7 @@ public static class InjecaoDependenciaExtensao
     services.AddScoped<IResetarSenhaCasoDeUso, ResetarSenhaCasoDeUso>();
 
     services.AddScoped<ICriarOrdemDeServicoCasoDeUso, CriarOrdemDeServicoCasoDeUso>();
+    services.AddScoped<IListarOrdensDeServicoCasoDeUso, ListarOrdensDeServicoCasoDeUso>();
 
     services.AddScoped<IFazerLoginCasoDeUso, FazerLoginCasoDeUso> ();
 
