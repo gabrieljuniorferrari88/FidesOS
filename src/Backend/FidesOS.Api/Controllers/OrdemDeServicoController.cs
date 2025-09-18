@@ -1,5 +1,6 @@
 ﻿using FidesOS.Api.Atributos;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Alterar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Cancelar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
@@ -47,6 +48,20 @@ public class OrdemDeServicoController : FidesOSControllerBase
     [FromBody] RequisicaoAlterarOrdemDeServicoJson request)
   {
     await useCase.Execute(osId, request);
+
+    return NoContent();
+  }
+
+  [HttpPut("{osId}")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
+  [UsuarioAutenticado]
+  public async Task<IActionResult> CancelarOrdemServico(
+    Guid osId,
+    [FromServices] ICancelarOrdemDeServicoCasoDeUso useCase
+    )
+  {
+    await useCase.Execute(osId);
 
     return NoContent();
   }

@@ -22,4 +22,9 @@ public class OrdemDeServico : EntidadeBase
   {
     GestorIdentificacao = gestorId;
   }
+
+  public void CancelarOrdemServico(StatusOS status)
+  {
+    Status = status;
+  }
 }
