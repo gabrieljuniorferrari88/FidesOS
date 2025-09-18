@@ -1,4 +1,4 @@
-﻿using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Respostas.Usuario;
 using FidesOS.Dominio.Servicos.UsuarioLogado;
 using Mapster;
 

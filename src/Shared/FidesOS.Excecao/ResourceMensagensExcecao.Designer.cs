@@ -79,6 +79,15 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data é idêntica ao atual..
+        /// </summary>
+        public static string DATA_IGUAL {
+            get {
+                return ResourceManager.GetString("DATA_IGUAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O agendamento precisa ser feito com pelo menos 3 horas de antecedência..
         /// </summary>
         public static string DATA_INFERIOR_3_HORAS {
@@ -102,6 +111,15 @@ namespace FidesOS.Excecao {
         public static string DATA_NO_PASSADO {
             get {
                 return ResourceManager.GetString("DATA_NO_PASSADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A descrição é idêntica ao atual..
+        /// </summary>
+        public static string DESCRICAO_IGUAL {
+            get {
+                return ResourceManager.GetString("DESCRICAO_IGUAL", resourceCulture);
             }
         }
         
@@ -219,6 +237,42 @@ namespace FidesOS.Excecao {
         public static string NOME_EM_BRANCO {
             get {
                 return ResourceManager.GetString("NOME_EM_BRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de uma OS já agendada não pode ser alterada..
+        /// </summary>
+        public static string OS_NAO_PODE_SER_ALTERADA_AGENDADA {
+            get {
+                return ResourceManager.GetString("OS_NAO_PODE_SER_ALTERADA_AGENDADA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ordem de serviço não pode ser alterada, pois já se encontra cancelada..
+        /// </summary>
+        public static string OS_NAO_PODE_SER_ALTERADA_CANCELADA {
+            get {
+                return ResourceManager.GetString("OS_NAO_PODE_SER_ALTERADA_CANCELADA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ordem de serviço não pode ser alterada, pois já se encontra concluída..
+        /// </summary>
+        public static string OS_NAO_PODE_SER_ALTERADA_CONCLUIDA {
+            get {
+                return ResourceManager.GetString("OS_NAO_PODE_SER_ALTERADA_CONCLUIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Apenas itens podem ser alterados em uma OS em andamento..
+        /// </summary>
+        public static string OS_NAO_PODE_SER_ALTERADA_EM_ANDAMENTO {
+            get {
+                return ResourceManager.GetString("OS_NAO_PODE_SER_ALTERADA_EM_ANDAMENTO", resourceCulture);
             }
         }
         

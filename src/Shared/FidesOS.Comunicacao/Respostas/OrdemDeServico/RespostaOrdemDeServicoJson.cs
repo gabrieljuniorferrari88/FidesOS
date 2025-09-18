@@ -1,6 +1,6 @@
 ﻿using FidesOS.Dominio.Enums;
 
-namespace FidesOS.Comunicacao.Respostas;
+namespace FidesOS.Comunicacao.Respostas.OrdemDeServico;
 
 public class RespostaOrdemDeServicoJson
 {

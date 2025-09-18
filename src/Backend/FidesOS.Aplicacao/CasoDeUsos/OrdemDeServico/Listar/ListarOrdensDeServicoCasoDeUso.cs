@@ -1,4 +1,5 @@
 ﻿using FidesOS.Comunicacao.Respostas;
+using FidesOS.Comunicacao.Respostas.OrdemDeServico;
 using FidesOS.Dominio.Repositorios.OrdensDeServicos;
 using FidesOS.Dominio.Servicos.UsuarioLogado;
 using Mapster;

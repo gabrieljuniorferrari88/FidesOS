@@ -1,6 +1,6 @@
 ﻿using FidesOS.Dominio.Enums;
 
-namespace FidesOS.Comunicacao.Requisicoes;
+namespace FidesOS.Comunicacao.Requisicoes.Usuario;
 public class RequisicaoRegistrarUsuarioJson
 {
   public string Nome { get; set; } = string.Empty;

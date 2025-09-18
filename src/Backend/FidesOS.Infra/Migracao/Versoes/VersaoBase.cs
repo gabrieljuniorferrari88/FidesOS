@@ -9,7 +9,7 @@ public abstract class VersaoBase : ForwardOnlyMigration
   {
     return Create.Table(table)
             .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-            .WithColumn("CriadoEm").AsDateTime().NotNullable()
-            .WithColumn("AtualizadoEm").AsDateTime().Nullable();
+            .WithColumn("CriadoEm").AsDateTimeOffset().NotNullable()
+            .WithColumn("AtualizadoEm").AsDateTimeOffset().Nullable();
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Requisicoes;
+﻿namespace FidesOS.Comunicacao.Requisicoes.FazerLogin;
 public class RequisicaoLoginJson
 {
   public string Email { get; set; } = string.Empty;

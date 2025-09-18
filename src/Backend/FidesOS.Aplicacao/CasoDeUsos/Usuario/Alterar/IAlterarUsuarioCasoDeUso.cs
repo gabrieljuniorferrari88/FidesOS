@@ -1,4 +1,4 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
+﻿using FidesOS.Comunicacao.Requisicoes.Usuario;
 
 namespace FidesOS.Aplicacao.CasoDeUsos.Usuario.Alterar;
 

@@ -123,6 +123,9 @@
   <data name="CODIGO_REQUERIDO_PARA_ALTERAR_SENHA" xml:space="preserve">
     <value>A code is required to reset your password.</value>
   </data>
+  <data name="DATA_IGUAL" xml:space="preserve">
+    <value>The date is identical to the current one.</value>
+  </data>
   <data name="DATA_INFERIOR_3_HORAS" xml:space="preserve">
     <value>Appointments must be made at least 3 hours in advance.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="DATA_NO_PASSADO" xml:space="preserve">
     <value>You can't schedule for past dates. Please select a future date.</value>
+  </data>
+  <data name="DESCRICAO_IGUAL" xml:space="preserve">
+    <value>The description is identical to the current one.</value>
   </data>
   <data name="DESCRICAO_INVALIDA" xml:space="preserve">
     <value>Description is required.</value>
@@ -171,6 +177,9 @@
   <data name="NOME_EM_BRANCO" xml:space="preserve">
     <value>Name cannot be empty.</value>
   </data>
+  <data name="OS_NAO_PODE_SER_ALTERADA_CANCELADA" xml:space="preserve">
+    <value>The service order cannot be changed as it has already been canceled.</value>
+  </data>
   <data name="PERFIL_NAO_INFORMADO" xml:space="preserve">
     <value>The profile was not informed.</value>
   </data>
@@ -185,5 +194,14 @@
   </data>
   <data name="USUARIO_SEM_PERMISSAO_ACESSAR_RECURSO" xml:space="preserve">
     <value>You do not have permission to access this resource.</value>
+  </data>
+  <data name="OS_NAO_PODE_SER_ALTERADA_CONCLUIDA" xml:space="preserve">
+    <value>The service order cannot be changed as it is already completed.</value>
+  </data>
+  <data name="OS_NAO_PODE_SER_ALTERADA_EM_ANDAMENTO" xml:space="preserve">
+    <value>Only items can be changed in an ongoing OS.</value>
+  </data>
+  <data name="OS_NAO_PODE_SER_ALTERADA_AGENDADA" xml:space="preserve">
+    <value>The date of an already scheduled OS cannot be changed.</value>
   </data>
 </root>

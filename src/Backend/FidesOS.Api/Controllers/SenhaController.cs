@@ -1,7 +1,8 @@
 ﻿using FidesOS.Aplicacao.CasoDeUsos.Senha.Recuperar;
 using FidesOS.Aplicacao.CasoDeUsos.Senha.Resetar;
-using FidesOS.Comunicacao.Requisicoes;
+using FidesOS.Comunicacao.Requisicoes.Senha;
 using FidesOS.Comunicacao.Respostas;
+using FidesOS.Comunicacao.Respostas.Senha;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidesOS.Api.Controllers;

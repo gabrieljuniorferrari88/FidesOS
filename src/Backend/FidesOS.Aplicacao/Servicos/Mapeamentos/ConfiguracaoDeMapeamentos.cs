@@ -1,5 +1,6 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
+using FidesOS.Comunicacao.Requisicoes.Usuario;
+using FidesOS.Comunicacao.Respostas.OrdemDeServico;
 using Mapster;
 
 namespace FidesOS.Aplicacao.Servicos.Mapeamentos;

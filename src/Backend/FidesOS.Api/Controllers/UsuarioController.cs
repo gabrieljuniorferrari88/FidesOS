@@ -3,8 +3,9 @@ using FidesOS.Aplicacao.CasoDeUsos.Usuario.Alterar;
 using FidesOS.Aplicacao.CasoDeUsos.Usuario.AlterarSenha;
 using FidesOS.Aplicacao.CasoDeUsos.Usuario.Perfil;
 using FidesOS.Aplicacao.CasoDeUsos.Usuario.Registrar;
-using FidesOS.Comunicacao.Requisicoes;
+using FidesOS.Comunicacao.Requisicoes.Usuario;
 using FidesOS.Comunicacao.Respostas;
+using FidesOS.Comunicacao.Respostas.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidesOS.Api.Controllers;

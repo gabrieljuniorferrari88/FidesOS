@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
 using FidesOS.Aplicacao.CasoDeUsos.Token.RefreshToken;
+using FidesOS.Comunicacao.Requisicoes.Token;
+using FidesOS.Comunicacao.Respostas.Token;
 
 namespace FidesOS.Api.Controllers;
 public class AuthenticationController : FidesOSControllerBase

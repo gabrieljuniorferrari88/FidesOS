@@ -9,6 +9,6 @@ public class Versao0000005 : VersaoBase
   {
     Alter.Table("Usuario")
         .AddColumn("TokenRecuperacaoSenha").AsString(255).Nullable()
-        .AddColumn("DataExpiracaoToken").AsDateTime().Nullable();
+        .AddColumn("DataExpiracaoToken").AsDateTimeOffset().Nullable();
   }
 }

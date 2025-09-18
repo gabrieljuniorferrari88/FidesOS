@@ -1,6 +1,7 @@
 ﻿using FidesOS.Aplicacao.CasoDeUsos.FazerLogin;
-using FidesOS.Comunicacao.Requisicoes;
+using FidesOS.Comunicacao.Requisicoes.FazerLogin;
 using FidesOS.Comunicacao.Respostas;
+using FidesOS.Comunicacao.Respostas.Usuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidesOS.Api.Controllers;

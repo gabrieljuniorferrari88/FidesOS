@@ -1,5 +1,5 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Requisicoes.FazerLogin;
+using FidesOS.Comunicacao.Respostas.Usuario;
 
 namespace FidesOS.Aplicacao.CasoDeUsos.FazerLogin;
 

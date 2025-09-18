@@ -1,4 +1,4 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
+﻿using FidesOS.Comunicacao.Requisicoes.Senha;
 using FidesOS.Dominio.Extencoes;
 using FidesOS.Excecao;
 using FluentValidation;

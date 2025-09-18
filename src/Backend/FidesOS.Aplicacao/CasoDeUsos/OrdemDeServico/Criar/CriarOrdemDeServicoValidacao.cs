@@ -1,4 +1,5 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
+﻿using FidesOS.Aplicacao.ValidadoresCompatilhados;
+using FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
 using FidesOS.Excecao;
 using FluentValidation;
 
@@ -9,12 +10,6 @@ public class CriarOrdemDeServicoValidacao : AbstractValidator<RequisicaoOrdemDeS
   public CriarOrdemDeServicoValidacao()
   {
     RuleFor(x => x.Descricao).NotEmpty().WithMessage(ResourceMensagensExcecao.DESCRICAO_INVALIDA);
-    RuleFor(x => x.DataAgendamento)
-            .NotEmpty()
-            .WithMessage(ResourceMensagensExcecao.DATA_INVALIDA)
-            .Must(data => data > DateTime.Now)
-            .WithMessage(ResourceMensagensExcecao.DATA_NO_PASSADO)
-            .Must(data => data >= DateTime.Now.AddHours(3))
-            .WithMessage(ResourceMensagensExcecao.DATA_INFERIOR_3_HORAS);
+    RuleFor(x => x.DataAgendamento).SetValidator(new ValidadorDeDataAgendamento<RequisicaoOrdemDeServicoJson>());
   }
 }

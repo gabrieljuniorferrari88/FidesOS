@@ -1,6 +1,6 @@
 ﻿using FidesOS.Aplicacao.Servicos.Autenticacao;
-using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
+using FidesOS.Comunicacao.Requisicoes.Token;
+using FidesOS.Comunicacao.Respostas.Token;
 using FidesOS.Dominio.Repositories;
 using FidesOS.Dominio.Repositorios.RefreshToken;
 using FidesOS.Dominio.Seguranca.Tokens;

@@ -1,5 +1,5 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Requisicoes.Usuario;
+using FidesOS.Comunicacao.Respostas.Usuario;
 
 namespace FidesOS.Aplicacao.CasoDeUsos.Usuario.Registrar;
 

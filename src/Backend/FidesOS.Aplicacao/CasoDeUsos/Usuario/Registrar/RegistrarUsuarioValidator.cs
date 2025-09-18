@@ -1,5 +1,5 @@
 ﻿using FidesOS.Aplicacao.ValidadoresCompatilhados;
-using FidesOS.Comunicacao.Requisicoes;
+using FidesOS.Comunicacao.Requisicoes.Usuario;
 using FidesOS.Dominio.Extencoes;
 using FidesOS.Excecao;
 using FluentValidation;

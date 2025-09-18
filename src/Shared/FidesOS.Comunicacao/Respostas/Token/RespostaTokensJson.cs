@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Respostas;
+﻿namespace FidesOS.Comunicacao.Respostas.Token;
 
 public class RespostaTokensJson
 {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FidesOS.Infra.AcessoDados.Repositorios;
 
-internal sealed class RepositorioOrdemDeServico : IRepositorioEscritaOrdemDeServico, IRepositorioLeituraOrdemDeServico
+internal sealed class RepositorioOrdemDeServico : IRepositorioEscritaOrdemDeServico, IRepositorioLeituraOrdemDeServico, IRepositorioAlteracaoOrdemDeServico
 {
   private readonly FidesOSDbContext _dbContext;
 
@@ -12,15 +12,18 @@ internal sealed class RepositorioOrdemDeServico : IRepositorioEscritaOrdemDeServ
 
   public async Task AddAsync(OrdemDeServico os) => await _dbContext.AddAsync(os);
 
+  public async Task<OrdemDeServico?> BuscarPorId(Guid osId) =>
+    await _dbContext.OrdensDeServico.SingleOrDefaultAsync(os => os.OsIdentificacao == osId);
+
   public async Task<int> ContarOSPorGestor(Guid gestorIdentificacao) => 
-    await _dbContext.OrdensDeServico.CountAsync(os => os.GestorIdentificacao.Equals(gestorIdentificacao));
+    await _dbContext.OrdensDeServico.CountAsync(os => os.GestorIdentificacao == gestorIdentificacao);
 
   public async Task<List<OrdemDeServico>> ListarOSPorGestor(Guid gestorIdentificacao, int pagina = 1, int itensPorPagina = 10)
   {
     var skip = (pagina - 1) * itensPorPagina;
 
     var lista = await _dbContext.OrdensDeServico
-      .Where(os => os.GestorIdentificacao.Equals(gestorIdentificacao))
+      .Where(os => os.GestorIdentificacao == gestorIdentificacao)
       .OrderByDescending(os => os.CriadoEm)
       .Skip(skip)
       .Take(itensPorPagina)

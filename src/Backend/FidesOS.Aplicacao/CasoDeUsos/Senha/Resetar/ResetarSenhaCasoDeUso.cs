@@ -1,4 +1,4 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
+﻿using FidesOS.Comunicacao.Requisicoes.Senha;
 using FidesOS.Dominio.Repositories;
 using FidesOS.Dominio.Repositories.Usuarios;
 using FidesOS.Dominio.Seguranca.Criptografia;

@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Respostas;
+﻿namespace FidesOS.Comunicacao.Respostas.FazerLogin;
 public class RespostaLoginJson
 {
   public string Nome { get; set; } = string.Empty;

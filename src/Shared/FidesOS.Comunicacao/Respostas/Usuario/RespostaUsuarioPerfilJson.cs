@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Respostas;
+﻿namespace FidesOS.Comunicacao.Respostas.Usuario;
 public class RespostaUsuarioPerfilJson
 {
   public string Nome { get; set; } = string.Empty;

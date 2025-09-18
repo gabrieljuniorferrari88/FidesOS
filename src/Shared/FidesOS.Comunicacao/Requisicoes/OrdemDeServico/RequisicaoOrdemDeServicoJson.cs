@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Requisicoes;
+﻿namespace FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
 
 public class RequisicaoOrdemDeServicoJson
 {

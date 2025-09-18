@@ -1,4 +1,4 @@
-﻿using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Respostas.Usuario;
 
 namespace FidesOS.Aplicacao.CasoDeUsos.Usuario.Perfil;
 

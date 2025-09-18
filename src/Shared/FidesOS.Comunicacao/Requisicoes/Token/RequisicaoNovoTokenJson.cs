@@ -1,4 +1,4 @@
-﻿namespace FidesOS.Comunicacao.Requisicoes;
+﻿namespace FidesOS.Comunicacao.Requisicoes.Token;
 
 public class RequisicaoNovoTokenJson
 {

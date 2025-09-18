@@ -1,5 +1,5 @@
-﻿using FidesOS.Comunicacao.Requisicoes;
-using FidesOS.Comunicacao.Respostas;
+﻿using FidesOS.Comunicacao.Requisicoes.Senha;
+using FidesOS.Comunicacao.Respostas.Senha;
 using FidesOS.Dominio.Extencoes;
 using FidesOS.Dominio.Repositories;
 using FidesOS.Dominio.Repositories.Usuarios;
