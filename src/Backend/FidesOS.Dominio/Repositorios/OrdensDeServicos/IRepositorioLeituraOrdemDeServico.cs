@@ -6,4 +6,5 @@ public interface IRepositorioLeituraOrdemDeServico
 {
   Task<List<OrdemDeServico>> ListarOSPorGestor(Guid gestorIdentificacao, int pagina, int itensPorPagina);
   Task<int> ContarOSPorGestor(Guid gestorIdentificacao);
+  Task<OrdemDeServico?> BuscarPorId(Guid osId);
 }

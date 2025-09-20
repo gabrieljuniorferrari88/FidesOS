@@ -1,5 +1,6 @@
 ﻿using FidesOS.Dominio.Entidades;
 using FidesOS.Dominio.Repositorios.OrdensDeServicos;
+using FidesOS.Infra.Servicos.UsuarioLogado;
 using Microsoft.EntityFrameworkCore;
 
 namespace FidesOS.Infra.AcessoDados.Repositorios;
@@ -12,7 +13,15 @@ internal sealed class RepositorioOrdemDeServico : IRepositorioEscritaOrdemDeServ
 
   public async Task AddAsync(OrdemDeServico os) => await _dbContext.AddAsync(os);
 
-  public async Task<OrdemDeServico?> BuscarPorId(Guid osId) =>
+  async Task<OrdemDeServico?> IRepositorioLeituraOrdemDeServico.BuscarPorId(Guid osId)
+  {
+    return await _dbContext
+      .OrdensDeServico
+      .AsNoTracking()
+      .SingleOrDefaultAsync(os => os.OsIdentificacao == osId);
+  }
+
+  async Task<OrdemDeServico?> IRepositorioAlteracaoOrdemDeServico.BuscarPorId(Guid osId) =>
     await _dbContext.OrdensDeServico.SingleOrDefaultAsync(os => os.OsIdentificacao == osId);
 
   public async Task<int> ContarOSPorGestor(Guid gestorIdentificacao) => 

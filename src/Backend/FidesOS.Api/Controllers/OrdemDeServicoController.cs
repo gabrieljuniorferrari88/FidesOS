@@ -1,5 +1,6 @@
 ﻿using FidesOS.Api.Atributos;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Alterar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Buscar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Cancelar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
@@ -52,7 +53,7 @@ public class OrdemDeServicoController : FidesOSControllerBase
     return NoContent();
   }
 
-  [HttpPut("{osId}")]
+  [HttpDelete("{osId}")]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
   [UsuarioAutenticado]
@@ -64,5 +65,19 @@ public class OrdemDeServicoController : FidesOSControllerBase
     await useCase.Execute(osId);
 
     return NoContent();
+  }
+
+  [HttpGet("{osId}")]
+  [ProducesResponseType(typeof(RespostaOrdemDeServicoJson), StatusCodes.Status201Created)]
+  [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
+  [UsuarioAutenticado]
+  public async Task<IActionResult> BuscarOrdemServicoPorId(
+    Guid osId,
+    [FromServices] IBuscarOrdemDeServicoCasoDeUso useCase
+    )
+  {
+    var response = await useCase.Execute(osId);
+
+    return Ok(response);
   }
 }
