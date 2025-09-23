@@ -39,4 +39,12 @@ internal sealed class RepositorioOrdemDeServico : IRepositorioEscritaOrdemDeServ
 
     return lista;
   }
+
+  public async Task<OrdemDeServico?> BuscarDetalhadaPorId(Guid osId)
+  {
+    return await _dbContext.OrdensDeServico
+    .Include(os => os.Alocacoes) // Carrega a lista de Alocações
+    .ThenInclude(alocacao => alocacao.Detalhes)// Para cada Alocação, carrega a lista de Detalhes
+    .SingleOrDefaultAsync(os => os.OsIdentificacao == osId);
+  }
 }

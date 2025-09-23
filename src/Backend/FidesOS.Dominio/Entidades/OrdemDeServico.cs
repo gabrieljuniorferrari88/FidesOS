@@ -1,6 +1,7 @@
 ﻿using FidesOS.Dominio.Enums;
 
 namespace FidesOS.Dominio.Entidades;
+
 public class OrdemDeServico : EntidadeBase
 {
   public Guid OsIdentificacao { get; protected set; } = Guid.CreateVersion7();
@@ -12,6 +13,9 @@ public class OrdemDeServico : EntidadeBase
   public string Descricao { get; protected set; } = string.Empty;
 
   // TODO: Adicionar a lista de Alocacoes (propriedade de navegação)
+
+  public IList<AlocacaoTrabalhador> Alocacoes { get; set; } = [];
+
   public void AtualizarOrdemServico(string novaDescricao, DateTime novaDataAgendamento)
   {
     Descricao = novaDescricao;

@@ -30,5 +30,20 @@ public static class ConfiguracaoDeMapeamentos
     TypeAdapterConfig<Dominio.Entidades.AlocacaoTrabalhador, RespostaAlocacaoJson>
             .NewConfig()
             .Map(dest => dest.Id, src => src.AlocacaoIdentificacao);
+
+    // Mapeia a entidade DetalheProducao para a sua resposta JSON
+    TypeAdapterConfig<Dominio.Entidades.DetalheProducao, RespostaDetalheProducaoJson>
+        .NewConfig()
+        .Map(dest => dest.Id, src => src.DetalheIdentificacao);
+
+    // Mapeia a entidade AlocacaoTrabalhador para a sua resposta JSON
+    TypeAdapterConfig<Dominio.Entidades.AlocacaoTrabalhador, RespostaAlocacaoTrabalhadorJson>
+        .NewConfig()
+        .Map(dest => dest.Id, src => src.AlocacaoIdentificacao);
+
+    // Mapeia a entidade OrdemDeServico para a sua resposta JSON detalhada
+    TypeAdapterConfig<Dominio.Entidades.OrdemDeServico, RespostaOrdemDeServicoDetalhadaJson>
+        .NewConfig()
+        .Map(dest => dest.Id, src => src.OsIdentificacao);
   }
 }

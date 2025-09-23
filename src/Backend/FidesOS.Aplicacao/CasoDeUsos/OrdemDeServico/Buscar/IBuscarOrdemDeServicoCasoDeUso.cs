@@ -4,5 +4,5 @@ namespace FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Buscar;
 
 public interface IBuscarOrdemDeServicoCasoDeUso
 {
-  Task<RespostaOrdemDeServicoJson> Execute(Guid osId);
+  Task<RespostaOrdemDeServicoDetalhadaJson> Execute(Guid osId);
 }

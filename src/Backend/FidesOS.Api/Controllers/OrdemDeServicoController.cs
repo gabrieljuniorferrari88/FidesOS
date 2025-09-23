@@ -71,7 +71,7 @@ public class OrdemDeServicoController : FidesOSControllerBase
   }
 
   [HttpGet("{osId}")]
-  [ProducesResponseType(typeof(RespostaOrdemDeServicoJson), StatusCodes.Status201Created)]
+  [ProducesResponseType(typeof(RespostaOrdemDeServicoDetalhadaJson), StatusCodes.Status200OK)]
   [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
   [UsuarioAutenticado]
   public async Task<IActionResult> BuscarOrdemServicoPorId(

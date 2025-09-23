@@ -21,6 +21,8 @@ public class AlocacaoTrabalhador : EntidadeBase
   public StatusFaturamento StatusFaturamento { get; protected set; }
   public StatusPagamento StatusPagamento { get; protected set; }
 
+  public IList<DetalheProducao> Detalhes { get; set; } = [];
+
   private AlocacaoTrabalhador()
   { }
 

@@ -13,22 +13,22 @@ public class BuscarOrdemDeServicoCasoDeUso : IBuscarOrdemDeServicoCasoDeUso
   private readonly IRepositorioLeituraOrdemDeServico _ordemDeServico;
 
   public BuscarOrdemDeServicoCasoDeUso(
-    IUsuarioLogado usuarioLogado, 
+    IUsuarioLogado usuarioLogado,
     IRepositorioLeituraOrdemDeServico ordemDeServico)
   {
     _usuarioLogado = usuarioLogado;
     _ordemDeServico = ordemDeServico;
   }
 
-  public async Task<RespostaOrdemDeServicoJson> Execute(Guid osId)
+  public async Task<RespostaOrdemDeServicoDetalhadaJson> Execute(Guid osId)
   {
     var usuarioLogado = await _usuarioLogado.Get();
 
-    var os = await _ordemDeServico.BuscarPorId(osId);
+    var os = await _ordemDeServico.BuscarDetalhadaPorId(osId);
 
     Validate(os, usuarioLogado.UserIdentificacao);
 
-    return os.Adapt<RespostaOrdemDeServicoJson>();
+    return os.Adapt<RespostaOrdemDeServicoDetalhadaJson>();
   }
 
   private void Validate(Dominio.Entidades.OrdemDeServico? os, Guid userIdentificacao)
