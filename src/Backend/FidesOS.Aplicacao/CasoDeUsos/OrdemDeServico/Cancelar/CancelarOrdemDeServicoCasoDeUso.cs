@@ -32,7 +32,7 @@ public class CancelarOrdemDeServicoCasoDeUso : ICancelarOrdemDeServicoCasoDeUso
 
     Validate(os, usuarioLogado.UserIdentificacao);
 
-    os!.CancelarOrdemServico(StatusOS.Cancelada);
+    os!.CancelarOrdemServico();
 
     await _unitOfWork.Commit();
   }

@@ -3,6 +3,7 @@ using FidesOS.Dominio.Extencoes;
 using FidesOS.Dominio.Repositories;
 using FidesOS.Dominio.Repositories.Usuarios;
 using FidesOS.Dominio.Repositorios.OrdensDeServicos;
+using FidesOS.Dominio.Repositorios.OrdensDeServicos.AlocarTrabalhador;
 using FidesOS.Dominio.Repositorios.RefreshToken;
 using FidesOS.Dominio.Seguranca.Criptografia;
 using FidesOS.Dominio.Seguranca.Tokens;
@@ -75,6 +76,8 @@ public static class InjecaoDependenciaExtensao
     services.AddScoped<IRepositorioEscritaOrdemDeServico, RepositorioOrdemDeServico>();
     services.AddScoped<IRepositorioLeituraOrdemDeServico, RepositorioOrdemDeServico>();
     services.AddScoped<IRepositorioAlteracaoOrdemDeServico, RepositorioOrdemDeServico>();
+
+    services.AddScoped<IRepositorioEscritaAlocacao, RepositorioAlocacaoTrabalhador>();
 
     services.AddScoped<IRefreshTokenRepositorioLeitura, RepositorioRefreshToken>();
 

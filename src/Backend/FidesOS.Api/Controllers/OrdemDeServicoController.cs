@@ -1,12 +1,15 @@
 ﻿using FidesOS.Api.Atributos;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.AlocarTrabalhador;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Alterar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Buscar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Cancelar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
+using FidesOS.Comunicacao.Requisicoes.OrdemDeServico.AlocarTrabalhador;
 using FidesOS.Comunicacao.Respostas;
 using FidesOS.Comunicacao.Respostas.OrdemDeServico;
+using FidesOS.Comunicacao.Respostas.OrdemDeServico.AlocarTrabalhador;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FidesOS.Api.Controllers;
@@ -79,5 +82,20 @@ public class OrdemDeServicoController : FidesOSControllerBase
     var response = await useCase.Execute(osId);
 
     return Ok(response);
+  }
+
+  //Alocando trabalhador
+  [HttpPost("{osId}/alocar")]
+  [ProducesResponseType(typeof(RespostaAlocacaoJson), StatusCodes.Status201Created)]
+  [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
+  [UsuarioAutenticado]
+  public async Task<IActionResult> AdicionarTrabalhadorNaOrdemServico(
+    [FromServices] IAlocarTrabalhadorCasoDeUso useCase,
+    [FromBody] RequisicaoAlocarTrabalhadorJson request,
+    Guid osId)
+  {
+    var response = await useCase.Execute(request, osId);
+
+    return Created(string.Empty, response);
   }
 }

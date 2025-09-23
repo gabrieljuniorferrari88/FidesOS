@@ -28,15 +28,7 @@ public class BuscarOrdemDeServicoCasoDeUso : IBuscarOrdemDeServicoCasoDeUso
 
     Validate(os, usuarioLogado.UserIdentificacao);
 
-    var resposta = os.Adapt<Dominio.Entidades.OrdemDeServico>();
-
-    return new RespostaOrdemDeServicoJson
-    {
-      DataAgendamento = resposta.DataAgendamento,
-      Descricao = resposta.Descricao,
-      Id = resposta.OsIdentificacao,
-      Status = resposta.Status
-    };
+    return os.Adapt<RespostaOrdemDeServicoJson>();
   }
 
   private void Validate(Dominio.Entidades.OrdemDeServico? os, Guid userIdentificacao)

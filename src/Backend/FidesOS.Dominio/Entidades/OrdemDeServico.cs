@@ -23,8 +23,8 @@ public class OrdemDeServico : EntidadeBase
     GestorIdentificacao = gestorId;
   }
 
-  public void CancelarOrdemServico(StatusOS status)
+  public void CancelarOrdemServico()
   {
-    Status = status;
+    Status = StatusOS.Cancelada;
   }
 }

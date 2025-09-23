@@ -204,4 +204,19 @@
   <data name="OS_NAO_PODE_SER_ALTERADA_AGENDADA" xml:space="preserve">
     <value>A data de uma OS já agendada não pode ser alterada.</value>
   </data>
+  <data name="TRABALHADOR_NAO_INFORMADO" xml:space="preserve">
+    <value>O trabalhador não informado ou inserido.</value>
+  </data>
+  <data name="VALOR_MENOR_OU_IGUAL_ZERO" xml:space="preserve">
+    <value>O não pode ser menor ou igual a zero.</value>
+  </data>
+  <data name="NAO_ENCONTRADO_TRABALHADOR" xml:space="preserve">
+    <value>Não encontrado o trabalhador informado.</value>
+  </data>
+  <data name="TRABALHADOR_INATIVO_PENDENTE" xml:space="preserve">
+    <value>Trabalhador informado está inativo ou pendente.</value>
+  </data>
+  <data name="TRABALHADOR_NAO_PERTENCE_AO_GESTOR" xml:space="preserve">
+    <value>Trabalhador não pertence a empresa contratada.</value>
+  </data>
 </root>

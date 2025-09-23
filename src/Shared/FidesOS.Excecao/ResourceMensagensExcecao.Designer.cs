@@ -232,6 +232,15 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não encontrado o trabalhador informado..
+        /// </summary>
+        public static string NAO_ENCONTRADO_TRABALHADOR {
+            get {
+                return ResourceManager.GetString("NAO_ENCONTRADO_TRABALHADOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O nome não pode estar vazio..
         /// </summary>
         public static string NOME_EM_BRANCO {
@@ -313,11 +322,47 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Trabalhador informado está inativo ou pendente..
+        /// </summary>
+        public static string TRABALHADOR_INATIVO_PENDENTE {
+            get {
+                return ResourceManager.GetString("TRABALHADOR_INATIVO_PENDENTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O trabalhador não informado ou inserido..
+        /// </summary>
+        public static string TRABALHADOR_NAO_INFORMADO {
+            get {
+                return ResourceManager.GetString("TRABALHADOR_NAO_INFORMADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Trabalhador não pertence a empresa contratada..
+        /// </summary>
+        public static string TRABALHADOR_NAO_PERTENCE_AO_GESTOR {
+            get {
+                return ResourceManager.GetString("TRABALHADOR_NAO_PERTENCE_AO_GESTOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Você não tem permissão para aceder a este recurso..
         /// </summary>
         public static string USUARIO_SEM_PERMISSAO_ACESSAR_RECURSO {
             get {
                 return ResourceManager.GetString("USUARIO_SEM_PERMISSAO_ACESSAR_RECURSO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O não pode ser menor ou igual a zero..
+        /// </summary>
+        public static string VALOR_MENOR_OU_IGUAL_ZERO {
+            get {
+                return ResourceManager.GetString("VALOR_MENOR_OU_IGUAL_ZERO", resourceCulture);
             }
         }
     }

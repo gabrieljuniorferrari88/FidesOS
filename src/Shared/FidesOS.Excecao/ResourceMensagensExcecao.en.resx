@@ -204,4 +204,19 @@
   <data name="OS_NAO_PODE_SER_ALTERADA_AGENDADA" xml:space="preserve">
     <value>The date of an already scheduled OS cannot be changed.</value>
   </data>
+  <data name="TRABALHADOR_NAO_INFORMADO" xml:space="preserve">
+    <value>The worker is not informed or included.</value>
+  </data>
+  <data name="VALOR_MENOR_OU_IGUAL_ZERO" xml:space="preserve">
+    <value>O cannot be less than or equal to zero.</value>
+  </data>
+  <data name="NAO_ENCONTRADO_TRABALHADOR" xml:space="preserve">
+    <value>Worker not found.</value>
+  </data>
+  <data name="TRABALHADOR_INATIVO_PENDENTE" xml:space="preserve">
+    <value>Reported worker is inactive or pending.</value>
+  </data>
+  <data name="TRABALHADOR_NAO_PERTENCE_AO_GESTOR" xml:space="preserve">
+    <value>Worker does not belong to the contracted company.</value>
+  </data>
 </root>

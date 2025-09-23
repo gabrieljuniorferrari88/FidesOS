@@ -1,4 +1,4 @@
-namespace FidesOS.Domain.Repositories.Usuarios;
+namespace FidesOS.Dominio.Repositories.Usuarios;
 
 public interface IRepositorioExclusaoUsuario
 {
