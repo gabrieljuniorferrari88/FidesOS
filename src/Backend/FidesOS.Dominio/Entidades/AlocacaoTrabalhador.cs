@@ -22,6 +22,7 @@ public class AlocacaoTrabalhador : EntidadeBase
   public StatusPagamento StatusPagamento { get; protected set; }
 
   public IList<DetalheProducao> Detalhes { get; set; } = [];
+  public OrdemDeServico OrdemDeServico { get; set; }
 
   private AlocacaoTrabalhador()
   { }
@@ -36,5 +37,9 @@ public class AlocacaoTrabalhador : EntidadeBase
     StatusPagamento = StatusPagamento.Pendente;
   }
 
-  // TODO: Adicionar a lista de DetalhesProducao (propriedade de navegação)
+  public void AdicionarCusto(long valorDoDetalhe)
+  {
+    ValorAcrescimo += valorDoDetalhe;
+    ValorTotal = ValorCombinado + ValorAcrescimo - ValorDesconto;
+  }
 }

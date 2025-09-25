@@ -12,15 +12,15 @@ public class AlocacaoTrabalhadorConfig : IEntityTypeConfiguration<AlocacaoTrabal
     builder.HasKey(a => a.Id);
 
     // Relacionamento com OrdemDeServico
-    builder.HasOne<OrdemDeServico>()
-          .WithMany(os => os.Alocacoes)
-          .HasForeignKey(a => a.OsIdentificacao)
-          .HasPrincipalKey(os => os.OsIdentificacao);
+    builder.HasOne(alocacao => alocacao.OrdemDeServico)
+               .WithMany(os => os.Alocacoes)
+               .HasForeignKey(alocacao => alocacao.OsIdentificacao)
+               .HasPrincipalKey(os => os.OsIdentificacao);
 
-    // Relacionamento com Usuario (Trabalhador)
+    // Relacionamento com Usuario (Trabalhador) - Já estava correto
     builder.HasOne<Usuario>()
-          .WithMany()
-          .HasForeignKey(a => a.TrabalhadorIdentificacao)
-          .HasPrincipalKey(usuario => usuario.UserIdentificacao);
+           .WithMany()
+           .HasForeignKey(a => a.TrabalhadorIdentificacao)
+           .HasPrincipalKey(usuario => usuario.UserIdentificacao);
   }
 }

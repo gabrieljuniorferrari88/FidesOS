@@ -45,5 +45,9 @@ public static class ConfiguracaoDeMapeamentos
     TypeAdapterConfig<Dominio.Entidades.OrdemDeServico, RespostaOrdemDeServicoDetalhadaJson>
         .NewConfig()
         .Map(dest => dest.Id, src => src.OsIdentificacao);
+
+    TypeAdapterConfig<Dominio.Entidades.DetalheProducao, RespostaDetalheProducaoJson>
+        .NewConfig()
+        .Map(dest => dest.Id, src => src.DetalheIdentificacao);
   }
 }
