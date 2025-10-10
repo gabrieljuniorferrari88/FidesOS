@@ -12,10 +12,16 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // Lê o token diretamente do cookie
-    const token = Cookies.get('accessToken'); // <<< CORREÇÃO AQUI
+    const token = Cookies.get('accessToken');
+
+	const language = navigator.language;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+
+	if (language) {
+        config.headers['Accept-Language'] = language;
     }
 
     return config;

@@ -1,4 +1,4 @@
-import api from ".."; // O '..' sobe um nível e pega o nosso axios configurado do index.ts
+import api from "..";
 
 // Importamos os "contratos" de resposta que acabamos de criar
 import {
@@ -32,4 +32,8 @@ export const buscarOsDetalhada = async (osId: string) => {
   // Faz a chamada para o endpoint específico, passando o ID na URL
   const response = await api.get<RespostaOrdemDeServicoDetalhadaJson>(`/ordemdeservico/${osId}`);
   return response.data;
+};
+
+export const cancelarOrdemDeServico = async (osId: string) => {
+  await api.delete(`/ordemdeservico/${osId}`);
 };
