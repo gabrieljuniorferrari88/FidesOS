@@ -4,6 +4,7 @@ using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Alterar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Buscar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Cancelar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.CriarCompleta;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.DetalheProducao.Adicionar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Comunicacao.Requisicoes.OrdemDeServico;
@@ -112,6 +113,19 @@ public class OrdemDeServicoController : FidesOSControllerBase
     Guid alocacaoId)
   {
     var response = await useCase.Execute(request, osId, alocacaoId);
+
+    return Created(string.Empty, response);
+  }
+
+  [HttpPost("completa")]
+  [ProducesResponseType(typeof(RespostaOrdemDeServicoDetalhadaJson), StatusCodes.Status201Created)]
+  [ProducesResponseType(typeof(RespostaErrorJson), StatusCodes.Status400BadRequest)]
+  [UsuarioAutenticado]
+  public async Task<IActionResult> CriarOrdemServicoCompleta(
+    [FromServices] ICriarOrdemDeServicoCompletaCasoDeUso useCase,
+    [FromBody] RequisicaoOrdemDeServicoCompletaJson request)
+  {
+    var response = await useCase.Execute(request);
 
     return Created(string.Empty, response);
   }

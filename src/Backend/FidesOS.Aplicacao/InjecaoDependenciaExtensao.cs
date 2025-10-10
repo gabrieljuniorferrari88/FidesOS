@@ -4,6 +4,7 @@ using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Alterar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Buscar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Cancelar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Criar;
+using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.CriarCompleta;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.DetalheProducao.Adicionar;
 using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.Listar;
 using FidesOS.Aplicacao.CasoDeUsos.Senha.Recuperar;
@@ -44,6 +45,7 @@ public static class InjecaoDependenciaExtensao
     services.AddScoped<IResetarSenhaCasoDeUso, ResetarSenhaCasoDeUso>();
 
     services.AddScoped<ICriarOrdemDeServicoCasoDeUso, CriarOrdemDeServicoCasoDeUso>();
+    services.AddScoped<ICriarOrdemDeServicoCompletaCasoDeUso, CriarOrdemDeServicoCompletaCasoDeUso>();
     services.AddScoped<IListarOrdensDeServicoCasoDeUso, ListarOrdensDeServicoCasoDeUso>();
     services.AddScoped<IAlterarOrdemDeServicoCasoDeUso, AlterarOrdemDeServicoCasoDeUso>();
     services.AddScoped<ICancelarOrdemDeServicoCasoDeUso, CancelarOrdemDeServicoCasoDeUso>();

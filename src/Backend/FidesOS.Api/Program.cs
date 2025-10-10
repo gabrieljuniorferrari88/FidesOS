@@ -12,6 +12,18 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var webAppUrl = "http://localhost:3000";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WebAppPolicy", policy =>
+    {
+        policy.WithOrigins(webAppUrl) // Permite que a URL do seu frontend acesse
+              .AllowAnyHeader()        // Permite qualquer cabeçalho (como Authorization)
+              .AllowAnyMethod();       // Permite qualquer método (GET, POST, PUT, etc.)
+    });
+});
+
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new StringConverter()));
 
 builder.Services.AddOpenApi();
@@ -74,6 +86,8 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<CultureMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseCors("WebAppPolicy");
 
 app.UseAuthorization();
 

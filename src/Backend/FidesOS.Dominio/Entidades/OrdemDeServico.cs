@@ -16,6 +16,16 @@ public class OrdemDeServico : EntidadeBase
 
   public IList<AlocacaoTrabalhador> Alocacoes { get; set; } = [];
 
+  public OrdemDeServico()
+  { }
+
+  public OrdemDeServico(Guid empresaClienteId, string descricao, DateTime dataAgendamento)
+  {
+    EmpresaClienteId = empresaClienteId;
+    Descricao = descricao;
+    DataAgendamento = dataAgendamento;
+  }
+
   public void AtualizarOrdemServico(string novaDescricao, DateTime novaDataAgendamento)
   {
     Descricao = novaDescricao;

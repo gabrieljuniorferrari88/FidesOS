@@ -53,4 +53,12 @@ internal sealed class UsuarioRepositorio : IRepositorioEscritaUsuario, IReposito
         .Where(e => e.Perfil.Equals(PerfilUsuario.Empresa))
         .AnyAsync(e => e.UserIdentificacao.Equals(id));
   }
+
+  public async Task<IList<Usuario>> BuscarVariosPorIdentificacao(IList<Guid> ids)
+  {
+    return await _dbContext.Usuarios
+        .AsNoTracking()
+        .Where(u => ids.Contains(u.UserIdentificacao))
+        .ToListAsync();
+  }
 }

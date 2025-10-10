@@ -1,4 +1,5 @@
-﻿using FidesOS.Comunicacao.Requisicoes.OrdemDeServico.AlocarTrabalhador;
+﻿using FidesOS.Aplicacao.CasoDeUsos.OrdemDeServico.DetalheProducao.Adicionar;
+using FidesOS.Comunicacao.Requisicoes.OrdemDeServico.AlocarTrabalhador;
 using FidesOS.Excecao;
 using FluentValidation;
 
@@ -10,5 +11,8 @@ public class AlocarTrabalhadorValidacao : AbstractValidator<RequisicaoAlocarTrab
   {
     RuleFor(x => x.ValorCombinado)
       .NotEmpty().GreaterThanOrEqualTo(0).WithMessage(ResourceMensagensExcecao.VALOR_MENOR_OU_IGUAL_ZERO);
+
+    RuleForEach(x => x.Detalhes)
+            .SetValidator(new AdicionarDetalheProducaoValidacao());
   }
 }

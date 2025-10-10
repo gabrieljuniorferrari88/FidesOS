@@ -33,7 +33,6 @@ public class CriarOrdemDeServicoCasoDeUso : ICriarOrdemDeServicoCasoDeUso
 
   public async Task<RespostaOrdemDeServicoJson> Execute(RequisicaoOrdemDeServicoJson request)
   {
-
     await Validate(request);
 
     var usuarioLogado = await _usuarioLogado.Get();
