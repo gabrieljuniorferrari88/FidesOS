@@ -33,7 +33,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-// 2. Crie um componente para a célula de ações
 const ActionsCell = ({
 	row,
 }: {
@@ -55,12 +54,10 @@ const ActionsCell = ({
 		},
 		onError: (errors: any) => {
 			if (errors.length === 1) {
-				// Se for só 1 erro, usamos o toast
-				toast.error("Falha ao cancelar a OS.", {
+				toast.error("Erro", {
 					description: errors[0],
 				});
 			} else {
-				// Se forem múltiplos, ativamos o estado que abre o AlertDialog
 				setApiErrors(errors);
 			}
 		},

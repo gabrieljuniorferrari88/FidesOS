@@ -1,5 +1,4 @@
-﻿
-using FidesOS.Dominio.Enums;
+﻿using FidesOS.Dominio.Enums;
 using FidesOS.Dominio.Repositories;
 using FidesOS.Dominio.Repositorios.OrdensDeServicos;
 using FidesOS.Dominio.Servicos.UsuarioLogado;
@@ -15,8 +14,8 @@ public class CancelarOrdemDeServicoCasoDeUso : ICancelarOrdemDeServicoCasoDeUso
   private readonly IRepositorioAlteracaoOrdemDeServico _ordemDeServico;
 
   public CancelarOrdemDeServicoCasoDeUso(
-    IUsuarioLogado usuarioLogado, 
-    IUnitOfWork unitOfWork, 
+    IUsuarioLogado usuarioLogado,
+    IUnitOfWork unitOfWork,
     IRepositorioAlteracaoOrdemDeServico ordemDeServico)
   {
     _usuarioLogado = usuarioLogado;
@@ -40,7 +39,7 @@ public class CancelarOrdemDeServicoCasoDeUso : ICancelarOrdemDeServicoCasoDeUso
   private void Validate(Dominio.Entidades.OrdemDeServico? os, Guid userIdentificacao)
   {
     if (os is null)
-      throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.NAO_ENCONTRADO });
+      throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.OS_NAO_EXISTE });
 
     if (os.GestorIdentificacao != userIdentificacao)
       throw new UnauthorizedException(ResourceMensagensExcecao.USUARIO_SEM_PERMISSAO_ACESSAR_RECURSO);
@@ -48,11 +47,10 @@ public class CancelarOrdemDeServicoCasoDeUso : ICancelarOrdemDeServicoCasoDeUso
     switch (os.Status)
     {
       case StatusOS.Cancelada:
-        throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.NAO_ENCONTRADO });
+        throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.OS_NAO_PODE_SER_ALTERADA_CANCELADA });
 
       case StatusOS.Concluida:
-        throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.NAO_ENCONTRADO });
+        throw new ErrorOnValidationException(new List<string> { ResourceMensagensExcecao.OS_NAO_PODE_SER_ALTERADA_CONCLUIDA });
     }
-
   }
 }

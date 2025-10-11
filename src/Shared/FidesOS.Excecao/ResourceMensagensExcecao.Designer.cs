@@ -250,6 +250,15 @@ namespace FidesOS.Excecao {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ordem de serviço não existe..
+        /// </summary>
+        public static string OS_NAO_EXISTE {
+            get {
+                return ResourceManager.GetString("OS_NAO_EXISTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A data de uma OS já agendada não pode ser alterada..
         /// </summary>
         public static string OS_NAO_PODE_SER_ALTERADA_AGENDADA {

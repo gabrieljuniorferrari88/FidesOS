@@ -219,4 +219,7 @@
   <data name="TRABALHADOR_NAO_PERTENCE_AO_GESTOR" xml:space="preserve">
     <value>Trabalhador não pertence a empresa contratada.</value>
   </data>
+  <data name="OS_NAO_EXISTE" xml:space="preserve">
+    <value>Ordem de serviço não existe.</value>
+  </data>
 </root>
