@@ -156,3 +156,14 @@
   /* Apply the reveal animation */
   animation: reveal 0.4s ease-in-out forwards;
 }
+
+table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+th, td {
+  padding: 0.75rem !important;
+  text-align: left !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}

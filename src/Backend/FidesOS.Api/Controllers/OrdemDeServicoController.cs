@@ -37,10 +37,10 @@ public class OrdemDeServicoController : FidesOSControllerBase
   [UsuarioAutenticado]
   public async Task<IActionResult> ListarOrdemServico(
     [FromServices] IListarOrdensDeServicoCasoDeUso useCase,
-    [FromQuery] int pagina,
-    [FromQuery] int itensPorPagina)
+    [FromQuery] int page,
+    [FromQuery] int perPage)
   {
-    var response = await useCase.Execute(pagina, itensPorPagina);
+    var response = await useCase.Execute(page, perPage);
 
     return Ok(response);
   }
