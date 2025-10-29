@@ -85,9 +85,7 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
             <IconFileText className="mr-2 h-4 w-4" /> Ver Detalhes
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() =>
-              router.push(`/dashboard/ordem-de-servico/edit/${os.id}`)
-            }
+            onClick={() => router.push(`/dashboard/ordem-de-servico/${os.id}`)}
           >
             <IconEdit className="mr-2 h-4 w-4" /> Editar OS
           </DropdownMenuItem>

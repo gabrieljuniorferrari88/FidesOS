@@ -8,6 +8,11 @@ interface ListarOSParams {
   descricao?: string;
 }
 
+interface AlterarOSParams {
+  descricao?: string;
+  dataAgendamento?: string;
+}
+
 interface CriarOSParams {
   empresaClienteId: string; // Guid como string
   descricao: string;
@@ -77,6 +82,33 @@ export const criarOrdemServico = async (dadosOS: CriarOSParams, token?: string) 
     // Podemos fazer tratamento específico aqui se necessário
     if (error.response?.data) {
       // Adiciona a tipagem do erro
+      error.apiError = error.response.data as RespostaErrorJson;
+    }
+    throw error;
+  }
+};
+
+export const alterarOrdemServico = async (osId: string, dadosOS: AlterarOSParams, token?: string) => {
+  try {
+    const config = token ? {
+      params: {
+        osId: osId
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept-Language': 'pt-BR'
+      }
+    } : {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const response = await api.put(`/ordemdeservico/${osId}`, dadosOS, config);
+    return response.data;
+  } catch (error: any) {
+    if (error.response?.data) {
       error.apiError = error.response.data as RespostaErrorJson;
     }
     throw error;

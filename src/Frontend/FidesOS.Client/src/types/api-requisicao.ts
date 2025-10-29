@@ -1,5 +1,5 @@
 export interface RequisicaoOrdemDeServicoJson {
-  empresaClientId: string;
+  empresaClienteId: string;
   descricao: string;
   dataAgendamento: Date;
 }

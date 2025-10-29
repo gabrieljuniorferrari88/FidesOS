@@ -194,5 +194,7 @@ FakesAssemblies/
 
 .vscode/settings.json
 
+.vscode
+
 /.sonarqube
 coverage.opencover.xml

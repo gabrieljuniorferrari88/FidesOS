@@ -27,7 +27,7 @@ export interface RespostaAlocacaoTrabalhadorJson {
 
 export interface RespostaOrdemDeServicoDetalhadaJson {
   id: string;
-  empresaClientId?: string;
+  empresaClienteId?: string;
   descricao: string;
   dataAgendamento: string;
   status: number;

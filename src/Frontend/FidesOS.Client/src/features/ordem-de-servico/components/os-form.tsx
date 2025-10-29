@@ -20,13 +20,13 @@ import {
   RespostaOrdemDeServicoDetalhadaJson,
   RespostaOrdemDeServicoJson,
 } from "@/types/api-resposta";
-import { criarOrdemServico } from "../services/os-service";
+import { alterarOrdemServico, criarOrdemServico } from "../services/os-service";
 
 import { toast } from "sonner";
 import * as z from "zod";
 
 const formSchema = z.object({
-  empresaClientId: z
+  empresaClienteId: z
     .string()
     .nonempty({ message: "Empresa cliente é obrigatório" }),
   dataAgendamento: z.date({
@@ -48,7 +48,7 @@ export default function OrdemDeServicoForm({
   pageTitle: string;
 }) {
   const defaultValues = {
-    empresaClientId: initialData?.empresaClientId || "",
+    empresaClienteId: initialData?.empresaClienteId || "",
     dataAgendamento: initialData?.dataAgendamento
       ? new Date(initialData.dataAgendamento)
       : undefined,
@@ -61,32 +61,51 @@ export default function OrdemDeServicoForm({
   });
 
   const router = useRouter();
-  const { token, isAuthenticated, logout } = useAuthStore();
+
+  const { token, isAuthenticated } = useAuthStore();
 
   const { handleError, errorAlert, closeError } = useApiError();
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: z.infer<typeof formSchema>) => {
-      // Verificação de segurança
       if (!token || !isAuthenticated) {
         handleError("Usuário não autenticado");
       }
 
-      return await criarOrdemServico(
-        {
-          empresaClienteId: values.empresaClientId,
-          descricao: values.descricao,
-          dataAgendamento: values.dataAgendamento.toISOString(),
-        },
-        token!
-      );
+      if (initialData && "id" in initialData) {
+        return await alterarOrdemServico(
+          initialData.id,
+          {
+            descricao: values.descricao,
+            dataAgendamento: values.dataAgendamento.toISOString(),
+          },
+          token!
+        );
+      } else {
+        return await criarOrdemServico(
+          {
+            empresaClienteId: values.empresaClienteId,
+            descricao: values.descricao,
+            dataAgendamento: values.dataAgendamento.toISOString(),
+          },
+          token!
+        );
+      }
     },
     onSuccess: (data: RespostaOrdemDeServicoJson) => {
-      toast.success("Ordem de serviço criada com sucesso!", {
-        description: "A OS foi cadastrada no sistema.",
-      });
+      const isEditMode = initialData !== null;
 
-      // Redireciona após sucesso
+      toast.success(
+        isEditMode
+          ? "Ordem de serviço atualizada com sucesso!"
+          : "Ordem de serviço criada com sucesso!",
+        {
+          description: isEditMode
+            ? "A OS foi atualizada no sistema."
+            : "A OS foi cadastrada no sistema.",
+        }
+      );
+
       router.push("/dashboard/ordem-de-servico");
     },
     onError: (error: any) => {
@@ -106,7 +125,6 @@ export default function OrdemDeServicoForm({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {/* 🔥 Alert de erros múltiplos */}
         {errorAlert.isOpen && (
           <ErrorAlert
             title={errorAlert.title}
@@ -120,14 +138,13 @@ export default function OrdemDeServicoForm({
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <FormInput
                 control={form.control}
-                name="empresaClientId"
+                name="empresaClienteId"
                 label="Empresa Cliente ID"
                 placeholder="Informe o Id do cliente"
                 required
               />
 
               <FormDateTimePicker
-                // className="w-full md:max-w-[290px]"
                 control={form.control}
                 name="dataAgendamento"
                 label="Data de Agendamento"
@@ -152,7 +169,13 @@ export default function OrdemDeServicoForm({
               }}
             />
             <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? "Criando os..." : "Add Nova OS"}
+              {isPending
+                ? initialData !== null
+                  ? "Salvando..."
+                  : "Criando..."
+                : initialData !== null
+                ? "Salvar Alterações"
+                : "Criar Nova OS"}
             </Button>
           </form>
         </Form>
