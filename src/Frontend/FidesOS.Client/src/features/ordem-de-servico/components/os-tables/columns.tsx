@@ -1,7 +1,7 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { DataTableColumnHeader } from "@/components/ui/table/data-table-column-header";
-import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-types";
+import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-resposta";
 import { Column, ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";

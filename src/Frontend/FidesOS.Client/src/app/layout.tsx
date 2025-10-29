@@ -17,8 +17,8 @@ const META_THEME_COLORS = {
 };
 
 export const metadata: Metadata = {
-  title: "Next Shadcn",
-  description: "Basic dashboard with Next.js and Shadcn",
+  title: "FidesOS",
+  description: "Sistema de gestão de ordens de serviço",
 };
 
 export const viewport: Viewport = {
@@ -35,7 +35,7 @@ export default async function RootLayout({
   const isScaled = activeThemeValue?.endsWith("-scaled");
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-br" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

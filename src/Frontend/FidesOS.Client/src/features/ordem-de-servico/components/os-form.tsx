@@ -1,160 +1,160 @@
-'use client';
+"use client";
 
-import { FormFileUpload } from '@/components/forms/form-file-upload';
-import { FormInput } from '@/components/forms/form-input';
-import { FormSelect } from '@/components/forms/form-select';
-import { FormTextarea } from '@/components/forms/form-textarea';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Form } from '@/components/ui/form';
-import { Product } from '@/constants/mock-api';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { FormDateTimePicker } from "@/components/forms/form-datetime-picker";
+import { FormInput } from "@/components/forms/form-input";
+import { FormTextarea } from "@/components/forms/form-textarea";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ErrorAlert } from "@/components/ui/error-alert";
+import { Form } from "@/components/ui/form";
 
-const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp'
-];
+import { useApiError } from "@/hooks/useApiError";
+import { useAuthStore } from "@/stores/auth-store";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+import { RequisicaoOrdemDeServicoJson } from "@/types/api-requisicao";
+import {
+  RespostaOrdemDeServicoDetalhadaJson,
+  RespostaOrdemDeServicoJson,
+} from "@/types/api-resposta";
+import { criarOrdemServico } from "../services/os-service";
+
+import { toast } from "sonner";
+import * as z from "zod";
 
 const formSchema = z.object({
-  image: z
-    .any()
-    .refine((files) => files?.length == 1, 'Image is required.')
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      '.jpg, .jpeg, .png and .webp files are accepted.'
-    ),
-  name: z.string().min(2, {
-    message: 'Product name must be at least 2 characters.'
+  empresaClientId: z
+    .string()
+    .nonempty({ message: "Empresa cliente é obrigatório" }),
+  dataAgendamento: z.date({
+    error: "A data e hora de agendamento é obrigatória.",
   }),
-  category: z.string(),
-  price: z.number(),
-  description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.'
-  })
+  descricao: z.string().min(10, {
+    message: "A descrição deve ter pelo menos 10 caracteres.",
+  }),
 });
 
-export default function ProductForm({
+export default function OrdemDeServicoForm({
   initialData,
-  pageTitle
+  pageTitle,
 }: {
-  initialData: Product | null;
+  initialData:
+    | RequisicaoOrdemDeServicoJson
+    | RespostaOrdemDeServicoDetalhadaJson
+    | null;
   pageTitle: string;
 }) {
   const defaultValues = {
-    name: initialData?.name || '',
-    category: initialData?.category || '',
-    price: initialData?.price || undefined,
-    description: initialData?.description || ''
+    empresaClientId: initialData?.empresaClientId || "",
+    dataAgendamento: initialData?.dataAgendamento
+      ? new Date(initialData.dataAgendamento)
+      : undefined,
+    descricao: initialData?.descricao || "",
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues
+    defaultValues: defaultValues,
   });
 
   const router = useRouter();
+  const { token, isAuthenticated, logout } = useAuthStore();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Form submission logic would be implemented here
-    console.log(values);
-    router.push('/dashboard/product');
-  }
+  const { handleError, errorAlert, closeError } = useApiError();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (values: z.infer<typeof formSchema>) => {
+      // Verificação de segurança
+      if (!token || !isAuthenticated) {
+        handleError("Usuário não autenticado");
+      }
+
+      return await criarOrdemServico(
+        {
+          empresaClienteId: values.empresaClientId,
+          descricao: values.descricao,
+          dataAgendamento: values.dataAgendamento.toISOString(),
+        },
+        token!
+      );
+    },
+    onSuccess: (data: RespostaOrdemDeServicoJson) => {
+      toast.success("Ordem de serviço criada com sucesso!", {
+        description: "A OS foi cadastrada no sistema.",
+      });
+
+      // Redireciona após sucesso
+      router.push("/dashboard/ordem-de-servico");
+    },
+    onError: (error: any) => {
+      handleError(error);
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    mutate(values);
+  };
 
   return (
-    <Card className='mx-auto w-full'>
+    <Card className="mx-auto w-full">
       <CardHeader>
-        <CardTitle className='text-left text-2xl font-bold'>
+        <CardTitle className="text-left text-2xl font-bold">
           {pageTitle}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Form
-          form={form}
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-8'
-        >
-          <FormFileUpload
-            control={form.control}
-            name='image'
-            label='Product Image'
-            description='Upload a product image'
-            config={{
-              maxSize: 5 * 1024 * 1024,
-              maxFiles: 4
-            }}
+        {/* 🔥 Alert de erros múltiplos */}
+        {errorAlert.isOpen && (
+          <ErrorAlert
+            title={errorAlert.title}
+            errors={errorAlert.errors}
+            onClose={closeError}
           />
+        )}
 
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-            <FormInput
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <FormInput
+                control={form.control}
+                name="empresaClientId"
+                label="Empresa Cliente ID"
+                placeholder="Informe o Id do cliente"
+                required
+              />
+
+              <FormDateTimePicker
+                // className="w-full md:max-w-[290px]"
+                control={form.control}
+                name="dataAgendamento"
+                label="Data de Agendamento"
+                required
+                config={{
+                  placeholder: "Escolha a data",
+                  minDate: new Date(),
+                }}
+              />
+            </div>
+
+            <FormTextarea
               control={form.control}
-              name='name'
-              label='Product Name'
-              placeholder='Enter product name'
+              name="descricao"
+              label="Descrição"
+              placeholder="Informe a descrição da ordem de serviço"
               required
+              config={{
+                maxLength: 500,
+                showCharCount: true,
+                rows: 4,
+              }}
             />
-
-            <FormSelect
-              control={form.control}
-              name='category'
-              label='Category'
-              placeholder='Select category'
-              required
-              options={[
-                {
-                  label: 'Beauty Products',
-                  value: 'beauty'
-                },
-                {
-                  label: 'Electronics',
-                  value: 'electronics'
-                },
-                {
-                  label: 'Home & Garden',
-                  value: 'home'
-                },
-                {
-                  label: 'Sports & Outdoors',
-                  value: 'sports'
-                }
-              ]}
-            />
-
-            <FormInput
-              control={form.control}
-              name='price'
-              label='Price'
-              placeholder='Enter price'
-              required
-              type='number'
-              min={0}
-              step='0.01'
-            />
-          </div>
-
-          <FormTextarea
-            control={form.control}
-            name='description'
-            label='Description'
-            placeholder='Enter product description'
-            required
-            config={{
-              maxLength: 500,
-              showCharCount: true,
-              rows: 4
-            }}
-          />
-
-          <Button type='submit'>Add Product</Button>
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? "Criando os..." : "Add Nova OS"}
+            </Button>
+          </form>
         </Form>
       </CardContent>
     </Card>

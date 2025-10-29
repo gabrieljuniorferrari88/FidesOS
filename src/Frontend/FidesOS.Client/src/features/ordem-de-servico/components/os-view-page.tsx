@@ -1,23 +1,28 @@
-import { fakeProducts, Product } from "@/constants/mock-api";
+import { RespostaOrdemDeServicoDetalhadaJson } from "@/types/api-resposta";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import ProductForm from "./os-form";
+import { buscarOrdemServicoPorId } from "../services/os-service";
+import OrdemDeServicoForm from "./os-form";
 
 type TOsViewPageProps = {
-  ordemServicoId: string;
+  osId: string;
 };
 
-export default async function OsViewPage({ ordemServicoId }: TOsViewPageProps) {
-  let os = null;
-  let pageTitle = "Create New OS";
+export default async function OsViewPage({ osId }: TOsViewPageProps) {
+  let os: RespostaOrdemDeServicoDetalhadaJson | null = null;
+  let pageTitle = "Criar nova OS";
 
-  if (ordemServicoId !== "new") {
-    const data = await fakeProducts.getProductById(Number(ordemServicoId));
-    os = data.product as Product;
-    if (!os) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+
+  if (osId !== "new") {
+    const data = await buscarOrdemServicoPorId(osId, token);
+    if (!data) {
       notFound();
     }
-    pageTitle = `Edit OS`;
+    os = data;
+    pageTitle = `Editar OS`;
   }
 
-  return <ProductForm initialData={os} pageTitle={pageTitle} />;
+  return <OrdemDeServicoForm initialData={os} pageTitle={pageTitle} />;
 }

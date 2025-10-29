@@ -1,5 +1,6 @@
 "use client";
 
+import { TimePicker } from "@/components/forms/time-picker/time-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -21,16 +22,15 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
 import { FieldPath, FieldValues } from "react-hook-form";
-import { TimePicker } from "./time-picker/time-picker";
 
-interface FormDatePickerProps<
+interface FormDateTimePickerProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > extends BaseFormFieldProps<TFieldValues, TName> {
   config?: DatePickerConfig;
 }
 
-function FormDatePicker<
+function FormDateTimePicker<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
@@ -42,7 +42,7 @@ function FormDatePicker<
   config = {},
   disabled,
   className,
-}: FormDatePickerProps<TFieldValues, TName>) {
+}: FormDateTimePickerProps<TFieldValues, TName>) {
   const {
     minDate,
     maxDate,
@@ -75,7 +75,7 @@ function FormDatePicker<
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {field.value ? (
-                    format(field.value, "dd 'de' MMMM 'de' yyyy", {
+                    format(field.value, "dd 'de' MMMM 'de' yyyy 'às' HH:mm", {
                       locale: ptBR,
                     })
                   ) : (
@@ -112,4 +112,4 @@ function FormDatePicker<
   );
 }
 
-export { FormDatePicker };
+export { FormDateTimePicker };

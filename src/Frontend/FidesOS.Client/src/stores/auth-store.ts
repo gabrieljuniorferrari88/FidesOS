@@ -14,6 +14,7 @@ interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  token: string | null;
   login: (token: string) => Promise<void>;
   logout: () => void;
   loadUser: () => Promise<void>;
@@ -22,13 +23,14 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()((set, get) => ({
   user: null,
   isAuthenticated: !!Cookies.get('accessToken'),
-  isLoading: true, // Começa carregando
+  isLoading: true,
+  token: Cookies.get('accessToken') || null,
 
    loadUser: async () => {
     const token = Cookies.get('accessToken');
 
     if (!token) {
-      set({ isLoading: false, isAuthenticated: false, user: null });
+      set({ isLoading: false, isAuthenticated: false, user: null, token: null });
       return;
     }
 
@@ -37,7 +39,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       set({
         isAuthenticated: true,
         user: userProfile,
-        isLoading: false
+        isLoading: false,
+        token: token
       });
     } catch (error) {
       console.error("Falha ao carregar perfil do usuário.", error);
@@ -46,7 +49,8 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       set({
         isAuthenticated: false,
         user: null,
-        isLoading: false
+        isLoading: false,
+        token: null
       });
     }
   },
@@ -55,15 +59,15 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     Cookies.set('accessToken', token, { expires: 1, secure: true });
     try {
       const userProfile = await getProfile();
-      set({ isAuthenticated: true, user: userProfile, isLoading: false });
+      set({ isAuthenticated: true, user: userProfile, isLoading: false, token: token });
     } catch (error) {
       console.error("Falha ao buscar perfil após login.", error);
-      set({ isAuthenticated: true, user: null, isLoading: false });
+      set({ isAuthenticated: true, user: null, isLoading: false, token: token });
     }
   },
 
   logout: () => {
     Cookies.remove('accessToken');
-    set({ isAuthenticated: false, user: null, isLoading: false });
+    set({ isAuthenticated: false, user: null, isLoading: false, token: null });
   }
 }));

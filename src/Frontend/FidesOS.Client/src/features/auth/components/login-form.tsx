@@ -61,39 +61,41 @@ export default function LoginForm() {
 
   return (
     <Form
-      form={form}
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-4 w-full"
+      {...form}
+      // onSubmit={form.handleSubmit(onSubmit)}
+      // className="space-y-4 w-full"
     >
-      <FormField
-        control={form.control}
-        name="email"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>E-mail</FormLabel>
-            <FormControl>
-              <Input placeholder="seu@email.com" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name="senha"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Senha</FormLabel>
-            <FormControl>
-              <Input type="password" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <Button type="submit" className="w-full" disabled={isPending}>
-        {isPending ? "Entrando..." : "Entrar"}
-      </Button>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>E-mail</FormLabel>
+              <FormControl>
+                <Input placeholder="seu@email.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="senha"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Senha</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full" disabled={isPending}>
+          {isPending ? "Entrando..." : "Entrar"}
+        </Button>
+      </form>
     </Form>
   );
 }

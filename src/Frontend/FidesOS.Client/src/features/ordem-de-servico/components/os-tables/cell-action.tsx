@@ -34,7 +34,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-types"; // <<< Use o seu tipo
+import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-resposta"; // <<< Use o seu tipo
 //import { useApiMutation } from '@/hooks/use-api-mutation'; // <<< Use nosso hook
 //import { cancelarOrdemDeServico } from '@/features/ordem-de-servico/services/os-service'; // <<< Use nosso serviço
 
