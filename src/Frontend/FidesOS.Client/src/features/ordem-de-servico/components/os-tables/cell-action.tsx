@@ -37,6 +37,7 @@ import { useApiError } from "@/hooks/useApiError";
 import { useAuthStore } from "@/stores/auth-store";
 import { ApiError } from "@/types/api-errors";
 import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-resposta";
+import { StatusOS } from "@/types/enums";
 import { toast } from "sonner";
 import { cancelarOrdemDeServico } from "../../services/os-service";
 
@@ -76,6 +77,14 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
 
   const handleCancel = (id: string) => mutate(id);
 
+  // const handleCancelClick = () => {
+  //   if (os.status === StatusOS.Cancelada) {
+  //     toast.info("Ordem de Serviço já cancelada!");
+  //     return false; // Impede que o modal abra
+  //   }
+  //   return true; // Permite que o modal abra
+  // };
+
   return (
     <>
       <DropdownMenu modal={false}>
@@ -101,43 +110,51 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
             <AlertDialogTrigger asChild>
               <DropdownMenuItem
                 className="cursor-pointer text-red-500 focus:text-red-600"
-                onSelect={(e) => e.preventDefault()}
+                onSelect={(e) => {
+                  e.preventDefault();
+                  if (os.status === StatusOS.Cancelada) {
+                    toast.warning("Ordem de Serviço já cancelada!");
+                    return;
+                  }
+                }}
               >
                 <IconTrash className="mr-2 h-4 w-4" /> Cancelar OS
               </DropdownMenuItem>
             </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle className="text-red-500 flex items-center">
-                  <IconAlertTriangle className="mr-2 h-4 w-4" />
-                  Cancelar
-                </AlertDialogTitle>
-                <AlertDialogDescription>
-                  Tem certeza de que deseja desativar esta{" "}
-                  <span className="font-bold">Ordem de Serviço?</span>
-                </AlertDialogDescription>
-                <AlertDialogDescription>
-                  Esta ação <span className="font-bold">desativará</span> a
-                  Ordem de Serviço não podendo altera-la mais tarde. Proceda com
-                  cautela.
-                </AlertDialogDescription>
+            {os.status !== StatusOS.Cancelada && (
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-red-500 flex items-center">
+                    <IconAlertTriangle className="mr-2 h-4 w-4" />
+                    Cancelar
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Tem certeza de que deseja desativar esta{" "}
+                    <span className="font-bold">Ordem de Serviço?</span>
+                  </AlertDialogDescription>
+                  <AlertDialogDescription>
+                    Esta ação <span className="font-bold">desativará</span> a
+                    Ordem de Serviço não podendo altera-la mais tarde. Proceda
+                    com cautela.
+                  </AlertDialogDescription>
 
-                <SimpleWarning
-                  title="Atenção!"
-                  description="Esta ação não pode ser desfeita."
-                />
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Voltar</AlertDialogCancel>
-                <AlertDialogAction
-                  className="cursor-pointer"
-                  disabled={isPending}
-                  onClick={() => handleCancel(os.id)}
-                >
-                  {isPending ? "Cancelando..." : "Sim, cancelar OS"}
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
+                  <SimpleWarning
+                    title="Atenção!"
+                    description="Esta ação não pode ser desfeita."
+                  />
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Voltar</AlertDialogCancel>
+                  <AlertDialogAction
+                    className="cursor-pointer"
+                    disabled={isPending}
+                    onClick={() => handleCancel(os.id)}
+                  >
+                    {isPending ? "Cancelando..." : "Sim, cancelar OS"}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            )}
           </AlertDialog>
         </DropdownMenuContent>
       </DropdownMenu>
