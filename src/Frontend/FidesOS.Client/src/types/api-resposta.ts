@@ -28,15 +28,15 @@ export interface RespostaAlocacaoTrabalhadorJson {
 export interface RespostaOrdemDeServicoDetalhadaJson {
   id: string;
   empresaClienteId?: string;
-  descricao: string;
-  dataAgendamento: string;
+  descricao?: string;
+  dataAgendamento?: string;
   status: number;
   alocacoes: RespostaAlocacaoTrabalhadorJson[];
 }
 
 export interface RespostaOrdemDeServicoJson {
   id: string;
-  descricao: string;
-  dataAgendamento: Date;
+  descricao?: string;
+  dataAgendamento?: string;
   status: number;
 }

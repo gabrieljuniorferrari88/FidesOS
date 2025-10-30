@@ -29,7 +29,7 @@ export default async function OrdemDeServicoPage(props: pageProps) {
             description="Gerencie suas ordens de serviço"
           />
           <Link
-            href="/dashboard/ordem-de-servico/new"
+            href="/dashboard/ordem-de-servico/novo"
             className={cn(buttonVariants(), "text-xs md:text-sm")}
           >
             <IconPlus className="mr-2 h-4 w-4" /> Add Novo

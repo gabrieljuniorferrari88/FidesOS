@@ -15,7 +15,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import { RequisicaoOrdemDeServicoJson } from "@/types/api-requisicao";
+import {
+  RequisicaoAlterarOrdemDeServicoJson,
+  RequisicaoOrdemDeServicoJson,
+} from "@/types/api-requisicao";
 import {
   RespostaOrdemDeServicoDetalhadaJson,
   RespostaOrdemDeServicoJson,
@@ -44,6 +47,7 @@ export default function OrdemDeServicoForm({
   initialData:
     | RequisicaoOrdemDeServicoJson
     | RespostaOrdemDeServicoDetalhadaJson
+    | RequisicaoAlterarOrdemDeServicoJson
     | null;
   pageTitle: string;
 }) {
@@ -67,7 +71,9 @@ export default function OrdemDeServicoForm({
   const { handleError, errorAlert, closeError } = useApiError();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: z.infer<typeof formSchema>) => {
+    mutationFn: async (
+      values: z.infer<typeof formSchema>
+    ): Promise<RespostaOrdemDeServicoJson> => {
       if (!token || !isAuthenticated) {
         handleError("Usuário não autenticado");
       }
@@ -120,9 +126,32 @@ export default function OrdemDeServicoForm({
   return (
     <Card className="mx-auto w-full">
       <CardHeader>
-        <CardTitle className="text-left text-2xl font-bold">
-          {pageTitle}
-        </CardTitle>
+        <div className="space-y-3">
+          <CardTitle className="text-left text-2xl font-bold">
+            {pageTitle}
+          </CardTitle>
+
+          {initialData && "id" in initialData ? (
+            <div className="space-y-2">
+              <h1>
+                User Details: Nona Waters
+                <span className="ml-2 text-muted-foreground text-xs font-mono bg-muted/50 px-3 py-0 rounded-md border inline-block">
+                  {initialData.id}
+                </span>
+              </h1>
+
+              <p className="text-muted-foreground text-base leading-relaxed">
+                Gerencie todas as informações desta ordem de serviço. Você pode
+                alterar dados de agendamento, descrição e status.
+              </p>
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-base leading-relaxed">
+              Crie uma nova ordem de serviço para atendimento. Preencha todos os
+              campos obrigatórios para registrar a OS no sistema.
+            </p>
+          )}
+        </div>
       </CardHeader>
       <CardContent>
         {errorAlert.isOpen && (

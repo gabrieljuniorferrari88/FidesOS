@@ -1,18 +1,15 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-//import { toast } from 'sonner';
 import {
+  IconAlertTriangle,
   IconDotsVertical,
   IconEdit,
   IconFileText,
   IconTrash,
 } from "@tabler/icons-react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Row } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 
-//import { AlertModal } from '@/components/modal/alert-modal';
-import { ErrorList } from "@/components/shared/ErrorList"; // Assumindo que você criou este
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,9 +31,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-resposta"; // <<< Use o seu tipo
-//import { useApiMutation } from '@/hooks/use-api-mutation'; // <<< Use nosso hook
-//import { cancelarOrdemDeServico } from '@/features/ordem-de-servico/services/os-service'; // <<< Use nosso serviço
+import { SimpleWarning } from "@/components/simple-warning";
+import { ErrorAlert } from "@/components/ui/error-alert";
+import { useApiError } from "@/hooks/useApiError";
+import { useAuthStore } from "@/stores/auth-store";
+import { ApiError } from "@/types/api-errors";
+import { RespostaOrdemDeServicoResumidaJson } from "@/types/api-resposta";
+import { toast } from "sonner";
+import { cancelarOrdemDeServico } from "../../services/os-service";
 
 interface CellActionProps {
   row: Row<RespostaOrdemDeServicoResumidaJson>; // <<< Use o tipo correto
@@ -46,29 +48,33 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
   const os = row.original;
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { token, isAuthenticated } = useAuthStore();
+  const { handleError, errorAlert, closeError } = useApiError();
 
-  // Nosso estado para controlar o diálogo de múltiplos erros
-  const [apiErrors, setApiErrors] = useState<string[]>([]);
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (id: string) => {
+      if (!token || !isAuthenticated) {
+        throw new Error("Usuário não autenticado");
+      }
 
-  // Nossa mutação para cancelar a OS, usando o hook customizado
-  // const { mutate: cancelarMutate, isPending: isCanceling } = useApiMutation({
-  //   mutationFn: cancelarOrdemDeServico,
-  //   onSuccess: () => {
-  //       toast.success("Ordem de Serviço cancelada com sucesso!");
-  //       queryClient.invalidateQueries({ queryKey: ['ordensDeServico'] });
-  //   },
-  //   onError: (errors) => {
-  //       if (errors.length === 1) {
-  //           toast.error("Erro ao cancelar", { description: errors[0] });
-  //       } else {
-  //           setApiErrors(errors);
-  //       }
-  //   }
-  // });
+      return await cancelarOrdemDeServico(id, token!);
+    },
+    onSuccess: () => {
+      toast.success("Ordem de Serviço cancelada com sucesso!");
+      router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["ordensDeServico"] });
+    },
+    onError: (errors: ApiError) => {
+      const errorMessage = errors || "Erro ao cancelar OS";
+      handleError(errorMessage);
+    },
+  });
 
   const handleViewDetails = () => {
-    router.push(`/dashboard/ordem-de-servico/${os.id}`);
+    router.push(`/dashboard/ordem-de-servico/detalhes/${os.id}`);
   };
+
+  const handleCancel = (id: string) => mutate(id);
 
   return (
     <>
@@ -91,7 +97,6 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
-          {/* Ação de Cancelar com AlertDialog de Confirmação */}
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <DropdownMenuItem
@@ -103,44 +108,56 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
+                <AlertDialogTitle className="text-red-500 flex items-center">
+                  <IconAlertTriangle className="mr-2 h-4 w-4" />
+                  Cancelar
+                </AlertDialogTitle>
                 <AlertDialogDescription>
-                  A OS será marcada como "Cancelada". Esta ação não pode ser
-                  desfeita.
+                  Tem certeza de que deseja desativar esta{" "}
+                  <span className="font-bold">Ordem de Serviço?</span>
                 </AlertDialogDescription>
+                <AlertDialogDescription>
+                  Esta ação <span className="font-bold">desativará</span> a
+                  Ordem de Serviço não podendo altera-la mais tarde. Proceda com
+                  cautela.
+                </AlertDialogDescription>
+
+                <SimpleWarning
+                  title="Atenção!"
+                  description="Esta ação não pode ser desfeita."
+                />
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Voltar</AlertDialogCancel>
-                {/* <AlertDialogAction
-                  disabled={isCanceling}
-                  onClick={() => cancelarMutate(os.id)}
+                <AlertDialogAction
+                  className="cursor-pointer"
+                  disabled={isPending}
+                  onClick={() => handleCancel(os.id)}
                 >
-                  {isCanceling ? "Cancelando..." : "Sim, cancelar OS"}
-                </AlertDialogAction> */}
+                  {isPending ? "Cancelando..." : "Sim, cancelar OS"}
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* AlertDialog para exibir múltiplos erros da API */}
       <AlertDialog
-        open={apiErrors.length > 0}
-        onOpenChange={() => setApiErrors([])}
+        open={errorAlert.errors.length > 0}
+        onOpenChange={(open) => !open && closeError()}
       >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-red-500">
-              Ocorreram Erros
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              <ErrorList errors={apiErrors} />
-            </AlertDialogDescription>
-          </AlertDialogHeader>
+        <AlertDialogContent className="max-w-md">
+          <AlertDialogHeader className="py-2"></AlertDialogHeader>
+          <div className="py-2">
+            <ErrorAlert
+              title="Erro ao cancelar OS"
+              errors={errorAlert.errors}
+              onClose={closeError}
+            />
+          </div>
+
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setApiErrors([])}>
-              Fechar
-            </AlertDialogAction>
+            <AlertDialogCancel onClick={closeError}>Fechar</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

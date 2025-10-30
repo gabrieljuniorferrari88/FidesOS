@@ -15,7 +15,7 @@ export default async function OsViewPage({ osId }: TOsViewPageProps) {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
 
-  if (osId !== "new") {
+  if (osId !== "novo") {
     const data = await buscarOrdemServicoPorId(osId, token);
     if (!data) {
       notFound();
