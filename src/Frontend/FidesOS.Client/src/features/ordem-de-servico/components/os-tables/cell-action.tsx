@@ -99,11 +99,25 @@ export const CellAction: React.FC<CellActionProps> = ({ row }) => {
           <DropdownMenuItem onClick={handleViewDetails}>
             <IconFileText className="mr-2 h-4 w-4" /> Ver Detalhes
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/ordem-de-servico/${os.id}`)}
-          >
-            <IconEdit className="mr-2 h-4 w-4" /> Editar OS
-          </DropdownMenuItem>
+          {os.status !== StatusOS.Cancelada ? (
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(`/dashboard/ordem-de-servico/${os.id}`)
+              }
+            >
+              <IconEdit className="mr-2 h-4 w-4" /> Editar OS
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem
+              onClick={() =>
+                toast.warning(
+                  "Ordem de Serviço cancelada, impossível alteração!"
+                )
+              }
+            >
+              <IconEdit className="mr-2 h-4 w-4" /> Editar OS
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
 
           <AlertDialog>
